@@ -1,1 +1,24 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Profit Calculator | MonyGist</title>
+  <link rel="stylesheet" href="/asset/css/style.css">
+</head>
+<body>
+  <header class="navbar"><div class="container"><a href="/" class="logo">Mony<span>Gist</span></a></div></header>
+  <div class="container" style="padding:40px 20px;">
+    <h1>Monthly Profit Calculator</h1>
+    <input id="revenue" type="number" placeholder="Monthly Revenue">
+    <input id="costs" type="number" placeholder="Monthly Costs">
+    <button class="btn btn-primary" onclick="profitCalc()">Calculate Profit</button>
+    <h2 id="profitResult"></h2>
+  </div>
+  <script>
+    function profitCalc(){
+      let profit = +revenue.value - +costs.value;
+      document.getElementById('profitResult').innerText = "Monthly Profit: " + formatMoney(profit);
+      localStorage.setItem('lastProfit', profit);
+    }
+  </script>
+</body>
+</html>
