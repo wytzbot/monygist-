@@ -1,18 +1,15 @@
-document.getElementById('recommenderForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const form = new FormData(e.target);
-  const budget = form.get('budget');
-  const time = form.get('time');
-  const risk = form.get('risk');
+function recommendBusiness(){
+  const budget = +document.getElementById('budgetInput').value;
+  const country = localStorage.getItem('country') || 'US';
   
-  let results = [];
-  if(budget === '$0-$1k') results = ['airbnb', 'freelance', 'dropshipping'];
-  else if(time === '5hrs') results = ['airbnb', 'vending-machine', 'carwash'];
-  else results = ['coffee-shop', 'food-truck', 'gym'];
-  
-  let html = '<h3>Your Top 3 Matches:</h3>';
-  results.forEach(id => {
-    html += `<a href="/ideas/?id=${id}" class="card">${id.replace('-',' ')}</a>`;
-  });
-  document.getElementById('quizResult').innerHTML = html;
-});
+  fetch('asset/data/businesses.json')
+  .then(r=>r.json())
+  .then(data => {
+    let matches = data.filter(b => b.startup[country] <= budget);
+    let html = '<h3>Best Businesses for Your Budget:</h3>';
+    matches.slice(0,3).forEach(b => {
+      html += `<div class="card"><h4>${b.name}</h4><p>Profit: ${formatMoney(b.profit[country])}</p></div>`
+    })
+    document.getElementById('recResult').innerHTML = html;
+  })
+}
