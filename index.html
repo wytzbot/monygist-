@@ -98,5 +98,13 @@ if(localStorage.getItem('dark')==='true') document.body.classList.add('dark');
   </div>
 </div>
 <script>setTimeout(()=>{if(!localStorage.getItem('popup')){popup.style.display='block';localStorage.setItem('popup','1')}}, 10000)</script>
+  <script>
+function saveBusiness(id){
+  let saved = JSON.parse(localStorage.getItem('saved') || '[]');
+  if(!saved.includes(id)) saved.push(id);
+  localStorage.setItem('saved', JSON.stringify(saved));
+  alert('Saved! Go to /compare/ to compare');
+}
+  </script>
 </body>
     </html>
