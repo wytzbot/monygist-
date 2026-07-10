@@ -1,1 +1,37 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Coffee Shop vs Food Truck | MonyGist</title>
+  <link rel="stylesheet" href="/asset/css/style.css">
+</head>
+<body>
+  <header class="navbar"><div class="container"><a href="/" class="logo">Mony<span>Gist</span></a></div></header>
+  <div class="container" style="padding:40px 20px;">
+    <h1>Coffee Shop vs Food Truck</h1>
+    <div class="grid">
+      <div class="card">
+        <h2>Coffee Shop</h2>
+        <p><b>Startup:</b> <span id="coffeeCost"></span></p>
+        <p><b>Profit:</b> <span id="coffeeProfit"></span></p>
+        <a href="/ideas/?id=coffee-shop" class="btn btn-primary">Full Guide</a>
+      </div>
+      <div class="card">
+        <h2>Food Truck</h2>
+        <p><b>Startup:</b> <span id="truckCost"></span></p>
+        <p><b>Profit:</b> <span id="truckProfit"></span></p>
+        <a href="/ideas/?id=food-truck" class="btn btn-primary">Full Guide</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    fetch('/asset/data/businesses.json').then(r=>r.json()).then(d=>{
+      const c = d.find(x=>x.id==='coffee-shop');
+      const t = d.find(x=>x.id==='food-truck');
+      coffeeCost.innerText = formatMoney(c.startup.US);
+      coffeeProfit.innerText = formatMoney(c.profit.US);
+      truckCost.innerText = formatMoney(t.startup.US);
+      truckProfit.innerText = formatMoney(t.profit.US);
+    })
+  </script>
+</body>
+                                   </html>
