@@ -1,1 +1,17 @@
-
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup Cost Calculator | MonyGist</title><link rel="stylesheet" href="../asset/css/style.css"></head><body>
+<header class="navbar"><div class="container"><a href="../../" class="logo">Mony<span>Gist</span></a>
+<select id="countrySwitcher"><option value="US">🇺🇸 US</option><option value="UK">🇬🇧 UK</option><option value="CA">🇨🇦 CA</option><option value="NG">🇳🇬 NG</option></select>
+<button onclick="toggleDark()" class="btn">🌙</button></div></header>
+<div class="container" style="padding:40px 20px;">
+<h1>Startup Cost Calculator</h1><p>Add up all your startup costs</p>
+<input id="sc1" type="number" placeholder="Equipment Cost" class="input">
+<input id="sc2" type="number" placeholder="Marketing Cost" class="input">
+<input id="sc3" type="number" placeholder="Other Costs" class="input">
+<button class="btn btn-primary" onclick="scCalc()">Total Startup Cost</button>
+<h2 id="scResult" style="margin-top:20px;color:var(--primary)"></h2>
+<button class="btn" onclick="showDownloadPopup('Startup Cost: ' + document.getElementById('scResult').innerText)">Save Result</button>
+</div><script src="../asset/js/main.js"></script>
+<script>function scCalc(){let total = (+sc1.value +sc2.value +sc3.value); scResult.innerText = "Total Needed: " + formatMoney(total);}</script>
+</body></html>
