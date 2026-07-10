@@ -26,3 +26,39 @@ body{background:#fff;color:var(--text);line-height:1.6;}
 footer{background:var(--dark);color:#fff;padding:40px 20px;margin-top:60px;text-align:center;}
 footer a{color:#93c5fd;}
 @media(max-width:768px){.hero h1{font-size:32px;}.navbar nav{display:none;}}
+/* MOBILE RESPONSIVE - THIS FIXES THE DESKTOP LOOK */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  
+  .navbar .container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .navbar nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .hero h1 { 
+    font-size: 28px; 
+    line-height: 1.2;
+  }
+  
+  .hero { padding: 50px 16px; }
+  
+  .grid {
+    grid-template-columns: 1fr; /* 1 card per row on mobile */
+    gap: 16px;
+  }
+  
+  .card { padding: 20px; }
+  
+  .country-select, .btn { width: 100%; }
+}
+
+/* Prevent zoom out on mobile */
+html { -webkit-text-size-adjust: 100%; }
+body { min-width: 320px; }
