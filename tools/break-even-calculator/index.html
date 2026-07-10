@@ -1,1 +1,23 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Break-even Calculator | MonyGist</title>
+  <link rel="stylesheet" href="/asset/css/style.css">
+</head>
+<body>
+  <header class="navbar"><div class="container"><a href="/" class="logo">Mony<span>Gist</span></a></div></header>
+  <div class="container" style="padding:40px 20px;">
+    <h1>Break-even Calculator</h1>
+    <input id="startup" type="number" placeholder="Total Startup Cost">
+    <input id="monthlyProfit" type="number" placeholder="Expected Monthly Profit">
+    <button class="btn btn-primary" onclick="beCalc()">How Long to Break Even</button>
+    <h2 id="beResult"></h2>
+  </div>
+  <script>
+    function beCalc(){
+      let months = Math.ceil(+startup.value / +monthlyProfit.value);
+      document.getElementById('beResult').innerText = "Break-even in: " + months + " months";
+    }
+  </script>
+</body>
+</html>
