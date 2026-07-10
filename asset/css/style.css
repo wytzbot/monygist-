@@ -62,3 +62,18 @@ footer a{color:#93c5fd;}
 /* Prevent zoom out on mobile */
 html { -webkit-text-size-adjust: 100%; }
 body { min-width: 320px; }
+/* DARK MODE */
+body.dark {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+body.dark .navbar { background: #1e293b; border-bottom-color: #334155; }
+body.dark .card { background: #1e293b; border: 1px solid #334155; }
+body.dark .input { background: #1e293b; border-color: #475569; color: #fff; }
+body.dark h1, body.dark h2, body.dark h3 { color: #fff; }
+body.dark a { color: #60a5fa; }
+body.dark .btn-primary { background: #3b82f6; }
+body.dark .btn-primary:hover { background: #2563eb; }
+
+/* Smooth transition */
+body, .card, .navbar { transition: background 0.3s, color 0.3s; }
