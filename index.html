@@ -2,109 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MonyGist | Real Business Costs, Profits & Tools for 2026</title>
-  <meta name="description" content="Find the best business idea for you. Real startup costs, profit calculators, and ROI tools for US, UK, CA, NG. Better than NerdWallet.">
   <link rel="stylesheet" href="asset/css/style.css">
-  <link rel="icon" href="/asset/img/logo.png">
 </head>
 <body>
-  <!-- NAVBAR -->
   <header class="navbar">
     <div class="container">
       <a href="/" class="logo">Mony<span>Gist</span></a>
       <nav>
-        <a href="/ideas/?id=coffee-shop">Business Ideas</a>
-        <a href="/tools/">Tools</a>
-        <a href="/compare/coffee-vs-foodtruck/">Compare</a>
+        <a href="#ideas">Business Ideas</a>
+        <a href="#tools">AI Tools</a>
         <a href="/about-page/">About</a>
       </nav>
       <select id="countrySwitcher" class="country-select">
-        <option value="US">🇺🇸 US</option>
-        <option value="UK">🇬🇧 UK</option>
-        <option value="CA">🇨🇦 CA</option>
-        <option value="NG">🇳🇬 NG</option>
+        <option value="US">🇺🇸 US</option><option value="UK">🇬🇧 UK</option>
+        <option value="CA">🇨🇦 CA</option><option value="NG">🇳🇬 NG</option>
       </select>
+      <button onclick="toggleDark()" class="btn">🌙</button>
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <h1>Find Your Next $10K/Month Business</h1>
-      <p>Real costs. Real profits. Real data for 2026. No fluff.</p>
-      <button class="btn btn-primary" onclick="document.getElementById('quiz').scrollIntoView()">Take 60s AI Quiz</button>
+      <p>Real costs. Real profits. Real data for 2026.</p>
+      <button class="btn btn-primary" onclick="document.getElementById('ideas').scrollIntoView()">Browse 40 Business Ideas</button>
     </div>
   </section>
 
-  <!-- AI RECOMMENDER QUIZ -->
-  <section id="quiz" class="container quiz-box">
-    <h2>AI Business Idea Recommender</h2>
-    <form id="recommenderForm">
-      <label>Budget?</label>
-      <select name="budget"><option>$0-$1k</option><option>$1k-$10k</option><option>$10k+</option></select>
-      
-      <label>Time per week?</label>
-      <select name="time"><option>5hrs</option><option>20hrs</option><option>40hrs+</option></select>
-      
-      <label>Risk level?</label>
-      <select name="risk"><option>Low</option><option>Medium</option><option>High</option></select>
-      
-      <button type="submit" class="btn btn-primary">Get My Top 3 Ideas</button>
-    </form>
-    <div id="quizResult"></div>
+  <!-- CATEGORY GRIDS FIRST -->
+  <section id="ideas" class="container tools-grid">
+    <h2>Browse Business Ideas by Category</h2>
+    <div class="grid" id="categoryGrid"></div>
   </section>
 
-  <!-- TOP TOOLS -->
-  <section class="container tools-grid">
-    <h2>Free Business Tools</h2>
+  <!-- AI TOOLS BUTTON SHOWS ALL TOOLS -->
+  <section id="tools" class="container tools-grid" style="display:none;">
+    <h2>All AI Tools & Calculators</h2>
     <div class="grid">
-      <a href="/tools/startup-calculator/" class="card">Startup Calculator</a>
-      <a href="/tools/profits-calculator/" class="card">Profit Calculator</a>
-      <a href="/tools/break-even-calculator/" class="card">Break-even Calculator</a>
-      <a href="/tools/roicalculator/" class="card">ROI Calculator</a>
-      <a href="/tools/business-name-generator/" class="card">Name Generator</a>
-      <a href="/tools/swotgenerator/" class="card">SWOT Generator</a>
-      <a href="/tools/marketing-planner/" class="card">Marketing Plan</a>
+      <a href="tools/startup-calculator/" class="card">Startup Calculator</a>
+      <a href="tools/profits-calculator/" class="card">Profit Calculator</a>
+      <a href="tools/break-even-calculator/" class="card">Break-even Calculator</a>
+      <a href="tools/roicalculator/" class="card">ROI Calculator</a>
+      <a href="tools/business-name-generator/" class="card">Name Generator</a>
+      <a href="tools/swotgenerator/" class="card">SWOT Generator</a>
+      <a href="tools/marketing-planner/" class="card">Marketing Plan</a>
     </div>
   </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>© 2026 MonyGist. We are a team of operators sharing real data. <a href="/about-page/methodology.html">How we calculate</a></p>
-    </div>
-  </footer>
-
-  <script src="/asset/js/main.js"></script>
-  <script src="/asset/js/recommender.js"></script>
-  <!-- DARK MODE TOGGLE -->
-<button onclick="toggleDark()" style="position:fixed;bottom:20px;right:20px;" class="btn">🌙</button>
-<script>
-function toggleDark(){
-  document.body.classList.toggle('dark');
-  localStorage.setItem('dark', document.body.classList.contains('dark'));
-}
-if(localStorage.getItem('dark')==='true') document.body.classList.add('dark');
-</script>
-<style>.dark{background:#0f172a;color:#fff}.dark .card{background:#1e293b;color:#fff}</style>
-
-<!-- EMAIL POPUP -->
-<div id="popup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);">
-  <div style="background:#fff;padding:40px;border-radius:12px;max-width:400px;margin:100px auto;text-align:center;">
-    <h2>Get 40 Business Ideas PDF Free</h2>
-    <input type="email" placeholder="Your email">
-    <button class="btn btn-primary">Download</button>
+  <div class="container" style="text-align:center;padding:40px;">
+    <button class="btn btn-primary" onclick="document.getElementById('tools').style.display='block'">Show All AI Tools</button>
   </div>
-</div>
-<script>setTimeout(()=>{if(!localStorage.getItem('popup')){popup.style.display='block';localStorage.setItem('popup','1')}}, 10000)</script>
-  <script>
-function saveBusiness(id){
-  let saved = JSON.parse(localStorage.getItem('saved') || '[]');
-  if(!saved.includes(id)) saved.push(id);
-  localStorage.setItem('saved', JSON.stringify(saved));
-  alert('Saved! Go to /compare/ to compare');
-}
-  </script>
+
+  <footer><div class="container"><p>© 2026 MonyGist</p></div></footer>
+
+  <!-- EMAIL POPUP -->
+  <div id="emailPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:40px;border-radius:12px;max-width:400px;">
+      <h2>Save Your Results</h2>
+      <p>Enter email to download</p>
+      <input id="emailInput" type="email" placeholder="you@email.com" style="width:100%;padding:12px;margin:10px 0;">
+      <button class="btn btn-primary" onclick="downloadFile()">Download Now</button>
+    </div>
+  </div>
+
+  <script src="asset/js/main.js"></script>
+  <script src="asset/js/loadIdeas.js"></script>
 </body>
-    </html>
+</html>
