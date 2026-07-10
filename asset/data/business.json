@@ -1,32 +1,5 @@
-[
-  {
-    "id": "coffee-shop",
-    "name": "Coffee Shop",
-    "summary": "We help you run a coffee shop that makes $8k-$15k/month. Low inventory waste, high repeat customers.",
-    "category": "Food",
-    "startup": {"US": 50000, "UK": 40000, "CA": 65000, "NG": 8000000},
-    "profit": {"US": 10000, "UK": 8000, "CA": 12000, "NG": 1500000},
-    "difficulty": 7,
-    "timeToProfit": "6-9 months"
-  },
-  {
-    "id": "food-truck",
-    "name": "Food Truck",
-    "summary": "We show you how to start a food truck with 1/3 the cost of a restaurant. Perfect for busy cities.",
-    "category": "Food",
-    "startup": {"US": 80000, "UK": 60000, "CA": 100000, "NG": 12000000},
-    "profit": {"US": 12000, "UK": 9000, "CA": 14000, "NG": 2000000},
-    "difficulty": 8,
-    "timeToProfit": "4-6 months"
-  },
-  {
-    "id": "airbnb",
-    "name": "Airbnb Rental Arbitrage",
-    "summary": "We rent apartments and list them on Airbnb. No property needed. $3k-$7k/month per unit.",
-    "category": "Real Estate",
-    "startup": {"US": 10000, "UK": 8000, "CA": 12000, "NG": 2000000},
-    "profit": {"US": 4000, "UK": 3500, "CA": 4500, "NG": 800000},
-    "difficulty": 6,
-    "timeToProfit": "1-2 months"
-  }
-]
+"location": "High foot traffic areas, malls",
+"limitations": "High rent, staff turnover",
+"competitors": "Starbucks, Local cafes",
+"howToBeat": "We focus on faster service + loyalty app",
+"mistake": "We bought too much equipment upfront"
