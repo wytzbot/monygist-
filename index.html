@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MonyGist | Real Business Costs, Profits & Tools for 2026</title>
+  <meta name="description" content="Find the best business idea for you. Real startup costs, profit calculators, and ROI tools for US, UK, CA, NG. Better than NerdWallet.">
+  <link rel="stylesheet" href="/asset/css/style.css">
+  <link rel="icon" href="/asset/img/logo.png">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container">
+      <a href="/" class="logo">Mony<span>Gist</span></a>
+      <nav>
+        <a href="/ideas/?id=coffee-shop">Business Ideas</a>
+        <a href="/tools/">Tools</a>
+        <a href="/compare/coffee-vs-foodtruck/">Compare</a>
+        <a href="/about-page/">About</a>
+      </nav>
+      <select id="countrySwitcher" class="country-select">
+        <option value="US">🇺🇸 US</option>
+        <option value="UK">🇬🇧 UK</option>
+        <option value="CA">🇨🇦 CA</option>
+        <option value="NG">🇳🇬 NG</option>
+      </select>
+    </div>
+  </header>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Find Your Next $10K/Month Business</h1>
+      <p>Real costs. Real profits. Real data for 2026. No fluff.</p>
+      <button class="btn btn-primary" onclick="document.getElementById('quiz').scrollIntoView()">Take 60s AI Quiz</button>
+    </div>
+  </section>
+
+  <!-- AI RECOMMENDER QUIZ -->
+  <section id="quiz" class="container quiz-box">
+    <h2>AI Business Idea Recommender</h2>
+    <form id="recommenderForm">
+      <label>Budget?</label>
+      <select name="budget"><option>$0-$1k</option><option>$1k-$10k</option><option>$10k+</option></select>
+      
+      <label>Time per week?</label>
+      <select name="time"><option>5hrs</option><option>20hrs</option><option>40hrs+</option></select>
+      
+      <label>Risk level?</label>
+      <select name="risk"><option>Low</option><option>Medium</option><option>High</option></select>
+      
+      <button type="submit" class="btn btn-primary">Get My Top 3 Ideas</button>
+    </form>
+    <div id="quizResult"></div>
+  </section>
+
+  <!-- TOP TOOLS -->
+  <section class="container tools-grid">
+    <h2>Free Business Tools</h2>
+    <div class="grid">
+      <a href="/tools/startup-calculator/" class="card">Startup Calculator</a>
+      <a href="/tools/profits-calculator/" class="card">Profit Calculator</a>
+      <a href="/tools/break-even-calculator/" class="card">Break-even Calculator</a>
+      <a href="/tools/roicalculator/" class="card">ROI Calculator</a>
+      <a href="/tools/business-name-generator/" class="card">Name Generator</a>
+      <a href="/tools/swotgenerator/" class="card">SWOT Generator</a>
+      <a href="/tools/marketing-planner/" class="card">Marketing Plan</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 MonyGist. We are a team of operators sharing real data. <a href="/about-page/methodology.html">How we calculate</a></p>
+    </div>
+  </footer>
+
+  <script src="/asset/js/main.js"></script>
+  <script src="/asset/js/recommender.js"></script>
+</body>
+    </html>
