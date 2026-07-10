@@ -1,14 +1,36 @@
-const params = new URLSearchParams(window.location.search);
-const id = params.get('id') || 'coffee-shop';
-
-fetch('/asset/data/businesses.json')
-.then(res => res.json())
-.then(data => {
-  const biz = data.find(b => b.id === id);
-  if(!biz) return;
-  document.getElementById('pageTitle').innerText = biz.name + " | MonyGist";
-  document.getElementById('businessName').innerText = biz.name;
-  document.getElementById('businessSummary').innerText = biz.summary;
-  document.getElementById('startupCost').innerText = formatMoney(biz.startup);
-  document.getElementById('monthlyProfit').innerText = formatMoney(biz.profit);
+// PWA Install
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  deferredPrompt = e;
 });
+
+// Components loader
+function loadComponent(id, file){
+  fetch(`asset/components/${file}`)
+  .then(r=>r.text())
+  .then(html => document.getElementById(id).innerHTML = html)
+}
+
+// Email Gate for downloads
+function showDownloadPopup(content){
+  document.getElementById('emailPopup').style.display='flex';
+  window.downloadContent = content;
+}
+function downloadFile(){
+  const email = document.getElementById('emailInput').value;
+  if(!email.includes('@')) return alert('Enter valid email');
+  localStorage.setItem('userEmail', email);
+  
+  const blob = new Blob([window.downloadContent], {type: 'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'MonyGist-Results.txt';
+  a.click();
+  document.getElementById('emailPopup').style.display='none';
+  alert('Downloaded! Check your files')
+}
+
+// Close popup on click outside
+document.addEventListener('click', e => {
+  if(e.target.id === 'emailPopup') e.target.style.display='none'
+})
