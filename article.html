@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Article | MonyGist</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>/*paste same CSS from index*/.article{max-width:800px;margin:0 auto;padding:60px 20px}.article h1{font-family:'Anton';font-size:42px}.article h2{color:var(--primary);margin-top:30px}</style>
+</head><body>
+<header style="padding:20px;border-bottom:1px solid var(--border)"><a href="index.html" class="logo">Mony<span style="color:var(--primary)">Gist</span></a></header>
+<div id="article" class="article"></div>
+<a href="tools.html" class="btn" style="margin:40px auto;display:block;width:fit-content">🚀 Ready to Launch? Use Our AI Tools Now</a>
+
+<script>
+//paste same businesses array + format function from index
+const id = new URLSearchParams(location.search).get('id');
+const b = businesses.find(x=>x.id===id); 
+country = localStorage.getItem('country') || 'US';
+article.innerHTML = `
+<h1>How to Start a ${b.name} in ${country} 2026</h1>
+<p><b>Startup Capital:</b> ${format(b.startup[country])} | <b>Monthly Profit:</b> ${format(b.profit[country])}</p>
+<h2>1. Overview</h2><p>${b.summary}. This business model works in ${country} because... ${b.summary}. ${b.summary}.</p>
+<h2>2. Competitors</h2><p>${b.comp}. To win, you must...</p>
+<h2>3. Limitations & Risks</h2><p>${b.limit}</p>
+<h2>4. #1 Mistake to Avoid</h2><p>${b.mistake}</p>
+<h2>5. How to Beat Competitors</h2><p>${b.beat}</p>
+<h2>6. 90-Day Launch Plan</h2><p>Week 1-4: Setup. Week 5-8: Marketing. Week 9-12: Scale to ${format(b.profit[country])}/mo</p>
+<button class="btn" onclick="window.pdfData='${b.name} Plan'; document.getElementById('emailPopup').style.display='flex'">📥 Save & Download PDF</button>
+`;
+</script>
+<div id="emailPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);align-items:center;justify-content:center"><div style="background:var(--card);padding:40px;border-radius:16px"><h3>Enter Email for PDF</h3><input id="email" type="email" class="input"><button class="btn" onclick="alert('PDF Downloaded')">Download</button></div></div>
+</body></html>
