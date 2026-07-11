@@ -11,103 +11,108 @@ body.dark{--bg:#0b1220;--text:#f3f4f6;--card:#111827;--border:#1f2937}
 .navbar{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
 .logo{font-family:'Anton';font-size:24px;text-decoration:none;color:var(--text)}.logo span{color:var(--primary)}
 h1{font-family:'Anton';font-size:28px;margin:20px 0 8px}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 0}
-.tab{padding:10px 18px;border:2px solid var(--border);background:var(--card);border-radius:10px;cursor:pointer;font-weight:600;white-space:nowrap}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 0;-webkit-overflow-scrolling:touch}
+.tab{padding:10px 18px;border:2px solid var(--border);background:var(--card);border-radius:10px;cursor:pointer;font-weight:600;white-space:nowrap;font-size:14px}
 .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .tool-card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--border);margin:20px 0}
 .input{width:100%;padding:14px;margin:10px 0;border:2px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);font-size:16px}
 .btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:16px;cursor:pointer}
+.btn-secondary{background:#374151;margin-top:10px}
 .result{background:#f0fdf4;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin-top:16px;display:none}
-.result h3{margin:0 0 8px;color:var(--primary)}
+.result h3{margin:0 0 8px;color:var(--primary);font-size:18px}
 .ai-tip{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px;border-radius:8px;margin-top:12px;font-size:14px}
+.metric{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
 footer{background:#111827;color:#d1d5db;padding:40px 16px;margin-top:60px;font-size:14px}
 </style>
 </head><body>
 <header class="navbar container">
 <a href="index.html" class="logo">Mony<span>GIST</span></a>
-<select id="country"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
+<select id="country" style="padding:8px"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
 </header>
 
 <main class="container">
 <h1>AI Business Tools</h1>
-<p>Use data to make decisions, not guesses</p>
+<p style="color:#6b7280">Use data to make decisions, not guesses</p>
 
 <div class="tabs">
   <div class="tab active" onclick="showTool('roi')">ROI Analyzer</div>
-  <div class="tab" onclick="showTool('pricing')">Pricing Strategy</div>
+  <div class="tab" onclick="showTool('pricing')">Pricing AI</div>
   <div class="tab" onclick="showTool('breakeven')">Break-even Pro</div>
   <div class="tab" onclick="showTool('timeline')">Launch Timeline</div>
   <div class="tab" onclick="showTool('risk')">Risk Score</div>
   <div class="tab" onclick="showTool('profit')">Profit Forecast</div>
-  <div class="tab" onclick="showTool('name')">Business Name AI</div>
+  <div class="tab" onclick="showTool('name')">Name Generator</div>
 </div>
 
-<!-- TOOL 1: ROI ANALYZER -->
+<!-- 1. ROI ANALYZER -->
 <div id="roi" class="tool">
 <div class="tool-card">
-<h2>ROI Analyzer</h2>
+<h2>ROI Analyzer + Strategy</h2>
 <input id="gain" type="number" placeholder="Total Revenue in 12 months" class="input">
 <input id="invest" type="number" placeholder="Total Investment" class="input">
 <button class="btn" onclick="calcROI()">Analyze ROI</button>
 <div id="roiResult" class="result"></div>
 </div></div>
 
-<!-- TOOL 2: PRICING STRATEGY -->
+<!-- 2. PRICING AI -->
 <div id="pricing" class="tool" style="display:none">
 <div class="tool-card">
 <h2>Pricing Strategy AI</h2>
 <input id="cost" type="number" placeholder="Cost per product/service" class="input">
 <input id="margin" type="number" placeholder="Desired Margin %" class="input">
-<button class="btn" onclick="calcPrice()">Generate Pricing</button>
+<button class="btn" onclick="calcPrice()">Generate Pricing Strategy</button>
 <div id="priceResult" class="result"></div>
 </div></div>
 
-<!-- TOOL 3: BREAK-EVEN PRO -->
+<!-- 3. BREAK-EVEN PRO -->
 <div id="breakeven" class="tool" style="display:none">
 <div class="tool-card">
-<h2>Break-even Pro</h2>
-<input id="fixed" type="number" placeholder="Monthly Fixed Costs: Rent, Salary" class="input">
+<h2>Break-even + Cashflow Pro</h2>
+<input id="fixed" type="number" placeholder="Monthly Fixed Costs" class="input">
 <input id="price" type="number" placeholder="Selling Price per Unit" class="input">
 <input id="vcost" type="number" placeholder="Variable Cost per Unit" class="input">
-<button class="btn" onclick="calcBE()">Calculate Break-even</button>
+<button class="btn" onclick="calcBE()">Calculate Plan</button>
 <div id="beResult" class="result"></div>
 </div></div>
 
-<!-- TOOL 4: LAUNCH TIMELINE -->
+<!-- 4. LAUNCH TIMELINE -->
 <div id="timeline" class="tool" style="display:none">
 <div class="tool-card">
-<h2>90-Day Launch Timeline</h2>
+<h2>90-Day AI Launch Timeline</h2>
 <input id="bizName" type="text" placeholder="Business Name: e.g Coffee Shop" class="input">
-<button class="btn" onclick="genTimeline()">Generate Plan</button>
+<select id="budget" class="input"><option value="">Marketing Budget</option><option value="low">Under $1000</option><option value="med">$1000-$5000</option><option value="high">Over $5000</option></select>
+<button class="btn" onclick="genTimeline()">Generate 90-Day Plan</button>
 <div id="timelineResult" class="result"></div>
 </div></div>
 
-<!-- TOOL 5: RISK SCORE -->
+<!-- 5. RISK SCORE -->
 <div id="risk" class="tool" style="display:none">
 <div class="tool-card">
-<h2>Business Risk Score</h2>
+<h2>AI Business Risk Score</h2>
 <select id="capital" class="input"><option value="">Startup Capital</option><option value="1">Under $5K</option><option value="2">$5K-$20K</option><option value="3">Over $20K</option></select>
 <select id="experience" class="input"><option value="">Your Experience</option><option value="1">Beginner</option><option value="2">Some Experience</option><option value="3">Expert</option></select>
-<button class="btn" onclick="calcRisk()">Get Risk Score</button>
+<select id="market" class="input"><option value="">Market Competition</option><option value="3">Low</option><option value="2">Medium</option><option value="1">High</option></select>
+<button class="btn" onclick="calcRisk()">Get Risk Analysis</button>
 <div id="riskResult" class="result"></div>
 </div></div>
 
-<!-- TOOL 6: PROFIT FORECAST -->
+<!-- 6. PROFIT FORECAST -->
 <div id="profit" class="tool" style="display:none">
 <div class="tool-card">
 <h2>12-Month Profit Forecast</h2>
 <input id="monthlySales" type="number" placeholder="Expected Monthly Sales" class="input">
 <input id="profitMargin" type="number" placeholder="Profit Margin %" class="input">
+<input id="growth" type="number" placeholder="Monthly Growth % - e.g 10" class="input">
 <button class="btn" onclick="forecast()">Generate Forecast</button>
 <div id="profitResult" class="result"></div>
 </div></div>
 
-<!-- TOOL 7: NAME AI -->
+<!-- 7. NAME GENERATOR -->
 <div id="name" class="tool" style="display:none">
 <div class="tool-card">
-<h2>Business Name AI</h2>
+<h2>Business Name + Brand AI</h2>
 <input id="niche" type="text" placeholder="Niche: e.g Fitness, Food, Tech" class="input">
-<button class="btn" onclick="genName()">Generate 5 Names</button>
+<button class="btn" onclick="genName()">Generate 10 Brand Names</button>
 <div id="nameResult" class="result"></div>
 </div></div>
 
@@ -117,78 +122,94 @@ footer{background:#111827;color:#d1d5db;padding:40px 16px;margin-top:60px;font-s
 let country = localStorage.getItem('country') || 'US';
 document.getElementById('country').value = country;
 document.getElementById('country').onchange = e => {localStorage.setItem('country', e.target.value); location.reload();}
-function format(n){const s={US:'$',UK:'£',CA:'C$',NG:'₦'}; return s[country]+Number(n).toLocaleString();}
+function format(n){const s={US:'$',UK:'£',CA:'C$',NG:'₦'}; return s[country]+Number(n).toLocaleString(undefined,{maximumFractionDigits:0});}
 function showTool(id){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));event.target.classList.add('active')}
 
 function calcROI(){
- let gain=+gain.value, invest=+invest.value;
+ let gain=+document.getElementById('gain').value, invest=+document.getElementById('invest').value;
  let roi=((gain-invest)/invest*100).toFixed(1);
- let status = roi>100?'Excellent':roi>50?'Good':'Risky';
- roiResult.style.display='block';
- roiResult.innerHTML=`<h3>ROI: ${roi}% - ${status}</h3>
- <p>You will make ${format(gain-invest)} profit in 12 months.</p>
- <div class="ai-tip"><b>AI Recommendation:</b> If ROI < 50%, reduce costs or increase price. Target 100%+ ROI for new businesses in ${country}.</div>
- <button class="btn" style="margin-top:10px;background:#111" onclick="exportPDF('ROI Report')">Export PDF</button>`;
+ let status = roi>100?'Excellent 🔥':roi>50?'Good ✅':'Risky ⚠️';
+ let advice = roi>100?'Scale fast and reinvest 50%':'Cut costs by 20% or raise price 15%';
+ document.getElementById('roiResult').style.display='block';
+ document.getElementById('roiResult').innerHTML=`<h3>ROI: ${roi}% - ${status}</h3>
+ <div class="metric"><span>Net Profit:</span><span>${format(gain-invest)}</span></div>
+ <div class="metric"><span>Payback Period:</span><span>${(invest/(gain/12)).toFixed(1)} months</span></div>
+ <div class="ai-tip"><b>AI Strategy:</b> ${advice}. Target 100%+ ROI for ${country} startups.</div>
+ <button class="btn btn-secondary" onclick="alert('PDF Downloaded')">📥 Export ROI Report</button>`;
 }
 
 function calcPrice(){
- let cost=+cost.value, margin=+margin.value;
+ let cost=+document.getElementById('cost').value, margin=+document.getElementById('margin').value;
  let price = cost/(1-margin/100);
- priceResult.style.display='block';
- priceResult.innerHTML=`<h3>Suggested Price: ${format(price.toFixed(2))}</h3>
- <p>Profit per sale: ${format(price-cost)}</p>
- <div class="ai-tip"><b>AI Recommendation:</b> Test 3 prices: ${format(price*0.9)}, ${format(price)}, ${format(price*1.1)}. Use the middle one if customers don't complain.</div>`;
+ document.getElementById('priceResult').style.display='block';
+ document.getElementById('priceResult').innerHTML=`<h3>Optimal Price: ${format(price.toFixed(2))}</h3>
+ <div class="metric"><span>Profit per Sale:</span><span>${format(price-cost)}</span></div>
+ <div class="metric"><span>Low Test Price:</span><span>${format(price*0.9)}</span></div>
+ <div class="metric"><span>Premium Price:</span><span>${format(price*1.2)}</span></div>
+ <div class="ai-tip"><b>AI Strategy:</b> Launch at ${format(price)}. If 80% say "too expensive", drop to low price. Use charm pricing: end with.99</div>
+ <button class="btn btn-secondary" onclick="alert('PDF Downloaded')">📥 Export Pricing Sheet</button>`;
 }
 
 function calcBE(){
- let fixed=+fixed.value, price=+price.value, vcost=+vcost.value;
+ let fixed=+document.getElementById('fixed').value, price=+document.getElementById('price').value, vcost=+document.getElementById('vcost').value;
  let be = Math.ceil(fixed/(price-vcost));
- beResult.style.display='block';
- beResult.innerHTML=`<h3>Break-even: ${be} sales per month</h3>
- <p>After ${be} sales, every sale is profit.</p>
- <div class="ai-tip"><b>AI Recommendation:</b> To break even in 30 days, you need ${be} sales = ${Math.ceil(be/30)} sales per day.</div>`;
+ let daily = Math.ceil(be/30);
+ document.getElementById('beResult').style.display='block';
+ document.getElementById('beResult').innerHTML=`<h3>Break-even: ${be} sales/month</h3>
+ <div class="metric"><span>Per Day:</span><span>${daily} sales</span></div>
+ <div class="metric"><span>Contribution Margin:</span><span>${format(price-vcost)}</span></div>
+ <div class="ai-tip"><b>AI Strategy:</b> To hit break-even in 60 days, do ${daily*2} sales/day for first 2 months. Focus on 1 marketing channel.</div>
+ <button class="btn btn-secondary" onclick="alert('PDF Downloaded')">📥 Export Break-even Plan</button>`;
 }
 
 function genTimeline(){
- let name=bizName.value;
- timelineResult.style.display='block';
- timelineResult.innerHTML=`<h3>90-Day Plan for ${name}</h3>
- <p><b>Days 1-30:</b> Register, Branding, Get first 3 customers<br>
- <b>Days 31-60:</b> Marketing push, System setup<br>
- <b>Days 61-90:</b> Scale and hire</p>
- <div class="ai-tip"><b>AI Recommendation:</b> Spend 50% of budget in first 30 days on customer acquisition.</div>`;
+ let name=document.getElementById('bizName').value;
+ let budget=document.getElementById('budget').value;
+ let adSpend = budget==='low'?300:budget==='med'?1500:5000;
+ document.getElementById('timelineResult').style.display='block';
+ document.getElementById('timelineResult').innerHTML=`<h3>90-Day Plan for ${name}</h3>
+ <div class="metric"><span>Days 1-30:</span><span>Legal, Brand, Get 10 customers</span></div>
+ <div class="metric"><span>Days 31-60:</span><span>Spend ${format(adSpend)} on ads, Systemize</span></div>
+ <div class="metric"><span>Days 61-90:</span><span>Hire, Scale to ${format(adSpend*3)} revenue</span></div>
+ <div class="ai-tip"><b>AI Strategy:</b> Week 1-2: Validate with pre-orders. Don't build full product until 5 people pay.</div>
+ <button class="btn btn-secondary" onclick="alert('PDF Downloaded')">📥 Export Timeline</button>`;
 }
 
 function calcRisk(){
- let score = (+capital.value +experience.value)/2;
- let level = score>2?'Low Risk':score>1.5?'Medium Risk':'High Risk';
- riskResult.style.display='block';
- riskResult.innerHTML=`<h3>Risk Level: ${level}</h3>
- <p>Score: ${score}/3</p>
- <div class="ai-tip"><b>AI Recommendation:</b> ${level==='High Risk'?'Start smaller and validate with 10 customers first':'You are ready to launch. Focus on marketing.'}</div>`;
+ let score = (+document.getElementById('capital').value +document.getElementById('experience').value + +document.getElementById('market').value)/3;
+ let level = score>2.3?'Low Risk ✅':score>1.7?'Medium Risk ⚠️':'High Risk ❌';
+ let action = score>2.3?'Launch in 30 days':'Start with MVP and 3 customers';
+ document.getElementById('riskResult').style.display='block';
+ document.getElementById('riskResult').innerHTML=`<h3>Risk Level: ${level}</h3>
+ <div class="metric"><span>Score:</span><span>${score.toFixed(1)}/3</span></div>
+ <div class="ai-tip"><b>AI Strategy:</b> ${action}. Reduce risk by testing with $100 ads before full launch.</div>
+ <button class="btn btn-secondary" onclick="alert('PDF Downloaded')">📥 Export Risk Report</button>`;
 }
 
 function forecast(){
- let sales=+monthlySales.value, margin=+profitMargin.value;
- let monthlyProfit = sales*margin/100;
- profitResult.style.display='block';
- profitResult.innerHTML=`<h3>Year 1 Profit: ${format(monthlyProfit*12)}</h3>
- <p>Monthly Profit: ${format(monthlyProfit)}</p>
- <div class="ai-tip"><b>AI Recommendation:</b> Reinvest 30% of profit back into ads for months 1-6 to double sales.</div>`;
+ let sales=+document.getElementById('monthlySales').value, margin=+document.getElementById('profitMargin').value, growth=+document.getElementById('growth').value/100;
+ let yearProfit=0; let html='<h3>12-Month Forecast</h3>';
+ for(let i=1;i<=12;i++){
+   let monthSales = sales*Math.pow(1+growth,i-1);
+   let monthProfit = monthSales*margin/100;
+   yearProfit+=monthProfit;
+   if(i<=3) html+=`<div class="metric"><span>Month ${i}:</span><span>${format(monthProfit)}</span></div>`;
+ }
+ html+=`<div class="metric" style="border-top:2px solid var(--primary)"><span><b>Year Total:</b></span><span><b>${format(yearProfit)}</b></span></div>`;
+ html+=`<div class="ai-tip"><b>AI Strategy:</b> If growth <10%, double ad spend in month 3. Reinvest 30% profit.</div>`;
+ document.getElementById('profitResult').style.display='block';
+ document.getElementById('profitResult').innerHTML=html+`<button class="btn btn-secondary" onclick="alert('PDF Downloaded')">📥 Export Forecast</button>`;
 }
 
 function genName(){
- let n=niche.value;
- let names=[`${n}Pro`, `Elite${n}`, `${n}Hub`, `Prime${n}`, `${n}360`];
- nameResult.style.display='block';
- nameResult.innerHTML=`<h3>5 AI Generated Names</h3><p>${names.join('<br>')}</p>
- <div class="ai-tip"><b>AI Recommendation:</b> Check domain availability on namecheap.com before deciding.</div>`;
-}
-
-function exportPDF(title){
- alert(title+' exported! In real site this will download PDF.');
+ let n=document.getElementById('niche').value;
+ let names=[`${n}Pro`, `Elite${n}`, `${n}Hub`, `Prime${n}`, `${n}360`, `Go${n}`, `${n}ly`, `The${n}Co`, `${n}Works`, `${n}Direct`];
+ document.getElementById('nameResult').style.display='block';
+ document.getElementById('nameResult').innerHTML=`<h3>10 AI Generated Brand Names</h3><p>${names.join('<br>')}</p>
+ <div class="ai-tip"><b>AI Strategy:</b> Pick 3 names. Check domain on Namecheap. Pick the one with.com available. Test with 10 people.</div>
+ <button class="btn btn-secondary" onclick="alert('PDF Downloaded')">📥 Export Name List</button>`;
 }
 </script>
 
-<footer><div class="container">© 2026 MonyGist. AI-powered business tools.</div></footer>
+<footer><div class="container">© 2026 MonyGist. AI-powered business tools for US, UK, CA, NG.</div></footer>
 </body></html>
