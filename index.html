@@ -1,91 +1,63 @@
 <!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MonyGist - Data-Driven Business Ideas</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><title>Business Categories | MonyGist</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--primary:#22c55e;--bg:#fff;--text:#111827;--card:#fff;--border:#e5e7eb}
 body.dark{--bg:#0b1220;--text:#f3f4f6;--card:#111827;--border:#1f2937}
 *{box-sizing:border-box}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);margin:0}
 .container{max-width:1200px;margin:0 auto;padding:20px}
-.skip{position:absolute;top:20px;right:20px;background:none;border:2px solid var(--primary);color:var(--primary);padding:8px 16px;border-radius:8px;font-weight:700;text-decoration:none}
-.welcome{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
-.welcome h1{font-family:'Anton',sans-serif;font-size:60px;letter-spacing:2px}.welcome h1 span{color:var(--primary)}
-.money{font-size:100px;animation:bounce 1.5s infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
-.search{width:100%;max-width:600px;padding:16px;border:3px solid var(--primary);border-radius:12px;font-size:18px;margin:20px 0}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid var(--border)}
+.logo{font-family:'Anton';font-size:28px;text-decoration:none;color:var(--text)}.logo span{color:var(--primary)}
+.search{width:100%;padding:16px;border:3px solid var(--primary);border-radius:12px;font-size:18px;margin:30px 0;background:var(--card);color:var(--text)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:40px 0}
-.cat-card{background:var(--card);padding:40px;border-radius:16px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:20px;font-weight:700}
-.cat-card:hover{border-color:var(--primary);transform:translateY(-5px)}
-.trust{background:var(--card);padding:20px;border-radius:12px;border:1px solid var(--border);margin:40px 0;font-size:14px}
-.btn{padding:14px 28px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+.card{background:var(--card);padding:40px;border-radius:16px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:20px;font-weight:700;transition:0.2s}
+.card:hover{border-color:var(--primary);transform:translateY(-5px)}
+footer{background:#111827;color:#d1d5db;padding:60px 20px;margin-top:80px}
 </style>
 </head><body>
-
-<!-- WELCOME SECTION -->
-<section id="welcome" class="welcome">
-<a href="#main" class="skip">Skip →</a>
-<h1>Mony<span>GIST</span></h1>
-<div class="money">💸</div>
-<p style="max-width:600px;margin:20px auto;font-size:18px">We gathered all business data from reliable sources including: <b>US Census Bureau, World Bank, Statista, Nerdwallet, and Federal CAC Nigeria</b> to give you accurate 2026 numbers.</p>
-<a href="#main" class="btn">Get Started</a>
-</section>
-
-<!-- MAIN APP -->
-<main id="main" class="container">
-<header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px">
-<h2>Mony<span style="color:var(--primary)">Gist</span></h2>
-<select id="country" style="padding:10px"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
+<header class="navbar container">
+<a href="index.html" class="logo">Mony<span>GIST</span></a>
+<div><select id="country" style="padding:10px"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
+<button onclick="toggleDark()">🌙</button></div>
 </header>
 
-<input id="search" placeholder="Search: coffee, POS, laundry..." class="search" onkeyup="loadCats()">
-
-<h2>Browse by Category</h2>
-<div id="catGrid" class="grid"></div>
-
-<h2 id="bizTitle" style="display:none">Businesses in <span id="catName"></span></h2>
-<div id="bizGrid" class="grid"></div>
+<main class="container">
+<input id="search" placeholder="Search: coffee, POS, laundry..." class="search" onkeyup="load()">
+<h2 id="title">Browse by Category</h2><div id="catGrid" class="grid"></div>
+<h2 id="bizTitle" style="display:none">Businesses in <span id="catName"></span></h2><div id="bizGrid" class="grid"></div>
 </main>
 
-<div id="emailPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);align-items:center;justify-content:center">
-<div style="background:var(--card);padding:40px;border-radius:16px"><h3>Save as PDF</h3><input id="email" type="email" placeholder="Email" style="padding:12px;width:100%;margin:10px 0"><button class="btn" onclick="downloadPDF()">Download</button></div>
-</div>
-
 <script>
-// DATA
 const businesses = [
-{id:"pos",name:"POS Business",cat:"Finance",summary:"Earn on transfers",startup:{US:2000,UK:1800,CA:2500,NG:350000},profit:{US:800,UK:700,CA:900,NG:150000},comp:"Banks",beat:"24/7 service",limit:"Network",mistake:"No cash"},
-{id:"coffee",name:"Coffee Shop",cat:"Food",summary:"$8k-$15k/month",startup:{US:50000,UK:40000,CA:65000,NG:8000000},profit:{US:10000,UK:8000,CA:12000,NG:1500000},comp:"Starbucks",beat:"App loyalty",limit:"High rent",mistake:"Too much equipment"},
-{id:"laundry",name:"Laundry",cat:"Service",summary:"Weekly customers",startup:{US:15000,UK:12000,CA:18000,NG:2500000},profit:{US:3500,UK:3000,CA:4000,NG:600000},comp:"Dry cleaners",beat:"24hr delivery",limit:"Power",mistake:"Underpricing"},
-{id:"agency",name:"Marketing Agency",cat:"Online",summary:"$500-$5000 per client",startup:{US:1000,UK:800,CA:1200,NG:200000},profit:{US:6000,UK:5000,CA:7000,NG:1000000},comp:"Freelancers",beat:"3x ROI",limit:"Retention",mistake:"Any client"},
-{id:"gym",name:"Boutique Gym",cat:"Health",summary:"$99/month members",startup:{US:100000,UK:80000,CA:120000,NG:15000000},profit:{US:18000,UK:14000,CA:20000,NG:3500000},comp:"Planet Fitness",beat:"Group classes",limit:"Equipment cost",mistake:"5yr lease"}
+{id:"pos",name:"POS Business",cat:"Finance",summary:"Earn on transfers and bill payments",startup:{US:2000,UK:1800,CA:2500,NG:350000},profit:{US:800,UK:700,CA:900,NG:150000},comp:"Banks and Fintechs",beat:"Offer 24/7 service and lower charges",limit:"Network downtime and cash float",mistake:"Not keeping enough cash"},
+{id:"coffee",name:"Coffee Shop",cat:"Food",summary:"$8k-$15k/month specialty coffee",startup:{US:50000,UK:40000,CA:65000,NG:8000000},profit:{US:10000,UK:8000,CA:12000,NG:1500000},comp:"Starbucks, Local cafes",beat:"Build loyalty app and unique drinks",limit:"High rent and staff costs",mistake:"Buying too much equipment upfront"},
+{id:"laundry",name:"Laundry Service",cat:"Service",summary:"Recurring weekly customers",startup:{US:15000,UK:12000,CA:18000,NG:2500000},profit:{US:3500,UK:3000,CA:4000,NG:600000},comp:"Dry cleaners",beat:"24hr pickup and delivery",limit:"Power and water costs",mistake:"Underpricing services"},
+{id:"agency",name:"Marketing Agency",cat:"Online",summary:"$500-$5000 per client monthly",startup:{US:1000,UK:800,CA:1200,NG:200000},profit:{US:6000,UK:5000,CA:7000,NG:1000000},comp:"Freelancers on Upwork",beat:"Guarantee 3x ROI in 90 days",limit:"Client retention",mistake:"Taking any client"},
+{id:"gym",name:"Boutique Gym",cat:"Health",summary:"$99/month memberships",startup:{US:100000,UK:80000,CA:120000,NG:15000000},profit:{US:18000,UK:14000,CA:20000,NG:3500000},comp:"Planet Fitness",beat:"Group classes and community",limit:"Expensive equipment",mistake:"Signing 5yr lease too early"}
 ];
 const categories = ["Food","Service","Online","Finance","Health"];
 let country = localStorage.getItem('country') || 'US';
 document.getElementById('country').value = country;
 document.getElementById('country').onchange = e => {localStorage.setItem('country', e.target.value); location.reload();}
 function format(n){const s={US:'$',UK:'£',CA:'C$',NG:'₦'}; return s[country]+Number(n).toLocaleString();}
-let selectedCat = '';
-
-function loadCats(){
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'));}
+if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');
+function load(){
  let q = search.value.toLowerCase();
- let cats = q ? [...new Set(businesses.filter(b=>b.name.toLowerCase().includes(q)).map(b=>b.cat))] : categories;
- catGrid.innerHTML = cats.map(c=>`<div class="cat-card" onclick="showBiz('${c}')">${c}</div>`).join('');
+ let cats = q? [...new Set(businesses.filter(b=>b.name.toLowerCase().includes(q)).map(b=>b.cat))] : categories;
+ catGrid.innerHTML = cats.map(c=>`<div class="card" onclick="showBiz('${c}')">${c}</div>`).join('');
 }
-
 function showBiz(cat){
- selectedCat = cat;
- bizTitle.style.display='block';
- catName.innerText = cat;
+ title.style.display='none'; bizTitle.style.display='block'; catName.innerText = cat;
  let data = businesses.filter(b=>b.cat===cat);
- bizGrid.innerHTML = data.map(b=>`<div class="cat-card" onclick="viewArticle('${b.id}')">${b.name}<p style="font-size:14px;font-weight:400">${b.summary}</p></div>`).join('');
+ bizGrid.innerHTML = data.map(b=>`<div class="card" onclick="location.href='article.html?id=${b.id}'">${b.name}<p style="font-size:14px;font-weight:400">${b.summary}</p></div>`).join('');
  window.scrollTo(0, bizGrid.offsetTop);
-}
-
-function viewArticle(id){
- window.location.href = `article.html?id=${id}`;
-}
-
-function downloadPDF(){alert('PDF Download triggered for: '+window.pdfData)}
-loadCats();
+} load();
 </script>
-</body>
-</html>
+<footer><div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px">
+<div><h3 style="font-family:'Anton';color:#fff">Mony<span style="color:#22c55e">GIST</span></h3></div>
+<div><h4 style="color:#fff">Company</h4><a href="about.html" style="color:#9ca3af;text-decoration:none;display:block">About Us</a><a href="contact.html" style="color:#9ca3af;text-decoration:none;display:block">Contact</a></div>
+<div><h4 style="color:#fff">Legal</h4><a href="privacy.html" style="color:#9ca3af;text-decoration:none;display:block">Privacy Policy</a><a href="terms.html" style="color:#9ca3af;text-decoration:none;display:block">Terms</a></div>
+<div><h4 style="color:#fff">Resources</h4><a href="categories.html" style="color:#9ca3af;text-decoration:none;display:block">Business Ideas</a><a href="tools.html" style="color:#9ca3af;text-decoration:none;display:block">AI Tools</a></div>
+</div><div style="text-align:center;margin-top:40px">© 2026 MonyGist</div></footer>
+</body></html>
