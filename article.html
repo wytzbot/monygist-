@@ -1,95 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business Report - MonyGIST</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="./data.js"></script> <!-- IMPORTANT:./ not / -->
-  <style>
-   .stat-card { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 1rem; padding: 1.25rem; text-align: center; border: 1px solid #bbf7d0; }
-   .stat-label { font-size: 0.75rem; color: #166534; font-weight: 700; text-transform: uppercase; }
-   .stat-value { font-size: 1.5rem; font-weight: 800; color: #14532d; margin-top: 0.25rem; }
-   .section { margin-bottom: 3rem; }
-   .section h2 { font-size: 1.75rem; font-weight: 800; color: #111827; margin-bottom: 1rem; border-left: 4px solid #22c55e; padding-left: 1rem; }
-   .section p,.section li { line-height: 1.8; font-size: 1.05rem; color: #374151; }
-   .section ol { list-style: decimal; padding-left: 1.5rem; }
-   .highlight-box { background: #fefce8; border-left: 4px solid #eab308; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
-  </style>
-</head>
-<body class="bg-gray-50">
-<header class="sticky top-0 bg-white border-b z-10 shadow-sm">
-  <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
-    <a href="/" class="text-2xl font-bold text-green-600">MonyGIST</a>
-    <button id="downloadPDF" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg font-bold text-sm">📄 Download PDF</button>
-  </div>
-</header>
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Details - MonyGIST</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#22c55e;--bg:#f9fafb;--card:#fff}
+body{font-family:'Inter';background:var(--bg);margin:0;line-height:1.7}
+header{padding:20px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0}
+header a{color:var(--primary);text-decoration:none;font-weight:600}
+.container{max-width:750px;margin:0 auto;padding:20px}
+h1{font-family:'Anton';font-size:38px;margin:10px 0}
+h2{font-size:22px;margin-top:25px;color:#111}
+.card{background:var(--card);padding:20px;border-radius:16px;margin:15px 0;box-shadow:0 4px 10px rgba(0,0,0,0.05)}
+.stat{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f1f1f1;font-size:16px}
+.stat b{color:var(--primary);font-weight:700}
+.highlight{background:#f0fff4;border-left:4px solid var(--primary);padding:15px;border-radius:8px;margin:15px 0}
+.btn{width:100%;padding:16px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:18px;margin-top:20px;cursor:pointer}
+ul{padding-left:20px}
+</style>
+<script src="data.js"></script>
+</head><body>
+<header><a href="index.html">← Back to MonyGIST</a></header>
+<div class="container" id="biz-details"><h1>Loading...</h1></div>
 
-<main class="max-w-5xl mx-auto px-4 py-10 bg-white rounded-xl shadow-sm mt-6 mb-10">
-  <div class="mb-8">
-    <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">USA 2026 DATA-DRIVEN REPORT</span>
-    <h1 id="businessName" class="text-4xl font-extrabold mt-4 mb-3">Loading...</h1>
-    <p id="businessSubtitle" class="text-xl text-gray-600">Loading...</p>
-  </div>
-
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-    <div class="stat-card"><div class="stat-label">Startup Cost</div><div id="startup" class="stat-value">N/A</div></div>
-    <div class="stat-card"><div class="stat-label">Avg Monthly Profit</div><div id="profit" class="stat-value">N/A</div></div>
-    <div class="stat-card"><div class="stat-label">Time to Profit</div><div id="time" class="stat-value">N/A</div></div>
-    <div class="stat-card"><div class="stat-label">Risk Level</div><div id="risk" class="stat-value">N/A</div></div>
-  </div>
-
-  <section class="section"><h2>1. Startup Cost Breakdown</h2><div id="section1"></div></section>
-  <section class="section"><h2>2. Profit Potential & Revenue Model</h2><div id="section2"></div></section>
-  <section class="section"><h2>3. Limitations & Challenges in 2026</h2><div id="section3"></div></section>
-  <section class="section"><h2>4. Best Locations in USA</h2><div id="section4"></div></section>
-  <section class="section"><h2>5. Competitors Strategy Analysis</h2><div id="section5"></div></section>
-  <section class="section"><h2>6. How to Beat Competitors</h2><div id="section6"></div></section>
-  <section class="section"><h2>7. Possible Loss and Reasons</h2><div id="section7"></div><div class="highlight-box"><strong>Warning:</strong> 42% of small businesses fail in year 1 due to these reasons.</div></section>
-  <section class="section"><h2>8. Plans for Small Scale Startup</h2><div id="section8"></div></section>
-  <section class="section"><h2>9. Best Marketing Strategies for 2026</h2><div id="section9"></div></section>
-
-  <section class="section bg-gray-50 p-6 rounded-xl border">
-    <h3 class="text-xl font-bold mb-4">Sources Cited & Data References</h3>
-    <ol id="sources" class="list-decimal pl-6 text-sm text-gray-600 space-y-2"></ol>
-  </section>
-
-  <section class="section mt-12 text-center border-t pt-10">
-    <h2 class="text-3xl font-bold mb-3">Ready to Execute This Business?</h2>
-    <a href="/tools.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-10 rounded-lg text-lg">Open AI Business Tools →</a>
-  </section>
-</main>
-
-<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  if(typeof businessData === 'undefined'){
-    document.getElementById('businessName').innerText = "Error: data.js not loaded";
-    document.getElementById('businessSubtitle').innerText = "Check that data.js has: const businessData = {...}";
-    return;
-  }
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id') || Object.keys(businessData)[0];
-  const data = businessData[id];
-  if(!data){
-    document.getElementById('businessName').innerText = "Business Not Found";
-    return;
-  }
-  document.getElementById('businessName').innerText = data.name;
-  document.getElementById('businessSubtitle').innerText = data.subtitle;
-  document.getElementById('startup').innerText = data.startup;
-  document.getElementById('profit').innerText = data.profit;
-  document.getElementById('time').innerText = data.time;
-  document.getElementById('risk').innerText = data.risk;
-  for(let i=1; i<=9; i++){ document.getElementById(`section${i}`).innerHTML = data[`s${i}`] || '<p>Data coming soon.</p>'; }
-  const sourcesList = document.getElementById('sources');
-  sourcesList.innerHTML = '';
-  if(data.sources && data.sources.length > 0){ data.sources.forEach(src => { sourcesList.innerHTML += `<li>${src}</li>`; }); }
-  document.getElementById('downloadPDF').onclick = () => {
-    const { jsPDF } = window.jspdf; const doc = new jsPDF();
-    doc.text(data.name, 15, 20); doc.save(data.name + '-Report.pdf');
-  }
-});
+const params = new URLSearchParams(window.location.search);
+const bizId = params.get('id');
+const business = BUSINESS_DATA.find(b => b.id === bizId);
+const div = document.getElementById('biz-details');
+
+if(business){
+  const annual = business.profit.US * 12;
+  const roi = ((annual)/business.startup.US*100).toFixed(1);
+  const payback = (business.startup.US / business.profit.US).toFixed(1);
+  
+  div.innerHTML = `
+    <h1>${business.name}</h1>
+    <p style="color:#666;font-size:16px">Category: ${business.cat}</p>
+
+    <div class="card">
+      <h2>💰 The Numbers</h2>
+      <div class="stat"><span>Startup Cost</span><b>$${business.startup.US.toLocaleString()}</b></div>
+      <div class="stat"><span>Monthly Profit</span><b>$${business.profit.US.toLocaleString()}</b></div>
+      <div class="stat"><span>Annual Profit</span><b>$${annual.toLocaleString()}</b></div>
+      <div class="stat"><span>ROI</span><b>${roi}% per year</b></div>
+      <div class="stat"><span>Payback Period</span><b>${payback} months</b></div>
+      <div class="highlight">
+        <b>What this means:</b> If you invest $${business.startup.US.toLocaleString()}, you can get your money back in ${payback} months. After that, it's $${business.profit.US.toLocaleString()} profit every month.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📖 What Is This Business?</h2>
+      <p>The <b>${business.name}</b> is in the ${business.cat} category. 
+      This business works by ${business.beat.toLowerCase()}. 
+      Your main customers will come from ${business.locations.toLowerCase()}.</p>
+      <p>To succeed here, you need to focus on beating the competition: ${business.comp}.</p>
+    </div>
+
+    <div class="card">
+      <h2>⚠️ Challenges to Know</h2>
+      <p><b>Biggest Limitation:</b> ${business.limit}</p>
+      <p><b>Common Mistake Beginners Make:</b> ${business.mistake}</p>
+      <div class="highlight">
+        <b>Pro Tip:</b> Avoid the mistake above by planning for it before you start. Most new businesses fail because of this.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🚀 How to Get Started</h2>
+      <ul>
+        <li><b>Step 1:</b> Validate demand in ${business.locations}</li>
+        <li><b>Step 2:</b> Budget $${business.startup.US.toLocaleString()} for startup costs</li>
+        <li><b>Step 3:</b> Differentiate yourself by ${business.beat}</li>
+        <li><b>Step 4:</b> Watch out for ${business.limit}</li>
+        <li><b>Step 5:</b> Scale once you hit $${business.profit.US.toLocaleString()}/month consistently</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="alert('AI Business Plan Generator for ${business.name} is Coming Soon')">Generate Full 30-Page AI Business Plan</button>
+  `;
+} else {
+  div.innerHTML = `<h1>Business Not Found</h1><p>The ID "${bizId}" doesn't exist in data.js</p>`;
+}
 </script>
-</body>
-  </html>
+</body></html>
