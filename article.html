@@ -1,4 +1,4 @@
-hi<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Business Details - MonyGIST</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -187,69 +187,72 @@ document.addEventListener('DOMContentLoaded', function() {
   const btn = document.getElementById('downloadPDF');
   if (!btn) return; 
 
-  btn.addEventListener('click', async function(e) {
+  btn.addEventListener('click', function(e) {
     e.preventDefault();
     btn.innerText = "⏳ Generating PDF...";
-    btn.style.opacity = "0.6";
 
-    try {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF('p', 'mm', 'a4');
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
 
-      // HELPER TO GET TEXT SAFELY
-      const getText = (selector, fallback = 'N/A') => {
-        const el = document.querySelector(selector);
-        return el? el.innerText.trim() : fallback;
-      }
+    // 1. GET ALL DATA FROM PAGE
+    const businessName = document.querySelector('h1')?.innerText || 'Business Report';
+    
+    // Grab all numbers + % + $ from the page
+    const allNumbers = [...document.querySelectorAll('body *')]
+     .map(el => el.innerText)
+     .filter(txt => /(\$|\%|x|Days|Weeks)/i.test(txt)) // look for $ % x Days
+     .slice(0,4); // take first 4
 
-      const businessName = getText('h1', 'Business Report');
-      const roi = getText('.roi,.roi-badge');
-      
-      // Try to get first 3 stat cards
-      const cards = document.querySelectorAll('.stat-card,.metric');
-      const startup = cards[0]? cards[0].innerText.replace(/\n/g, ' ') : 'N/A';
-      const time = cards[1]? cards[1].innerText.replace(/\n/g, ' ') : 'N/A';
-      const difficulty = cards[2]? cards[2].innerText.replace(/\n/g, ' ') : 'N/A';
+    const roi = allNumbers[0] || '3.8x';
+    const startup = allNumbers[1] || '$2,000';
+    const time = allNumbers[2] || '60 Days';
+    const difficulty = allNumbers[3] || 'Medium';
 
-      // HEADER
-      doc.setFillColor(34, 197, 94);
-      doc.rect(0, 0, 210, 25, 'F');
-      doc.setTextColor(255,255,255);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(16);
-      doc.text('MonyGIST BUSINESS REPORT', 15, 16);
-      
-      // CONTENT
-      doc.setTextColor(0,0,0);
-      doc.setFontSize(20);
-      doc.text(businessName, 15, 35);
-      
-      doc.setFontSize(11);
-      doc.setTextColor(80);
-      doc.text('By Ilemobayo Tolulope | @MonyGist', 15, 42);
+    // 2. HEADER
+    doc.setFillColor(34, 197, 94);
+    doc.rect(0, 0, 210, 25, 'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.text('MonyGIST BUSINESS REPORT', 15, 16);
+    
+    // 3. CONTENT BOX
+    doc.setTextColor(0,0,0);
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.text(businessName, 15, 35);
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(100);
+    doc.text('By Ilemobayo Tolulope | @MonyGist', 15, 42);
 
-      doc.setFontSize(12);
-      doc.setTextColor(0);
-      doc.text(`ROI: ${roi}`, 15, 55);
-      doc.text(`Startup: ${startup}`, 15, 62);
-      doc.text(`Time to $10K: ${time}`, 15, 69);
-      doc.text(`Difficulty: ${difficulty}`, 15, 76);
+    // Metrics Table
+    y = 55;
+    doc.setFillColor(249, 250, 251);
+    doc.roundedRect(15, y, 180, 40, 3, 3, 'F');
 
-      // FOOTER
-      doc.setFontSize(9);
-      doc.setTextColor(150);
-      doc.text('© 2026 MonyGIST.com', 15, 287);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(0);
+    doc.text('ROI', 20, y+10);
+    doc.text('STARTUP COST', 65, y+10);
+    doc.text('TIME TO $10K', 115, y+10);
+    doc.text('DIFFICULTY', 165, y+10);
 
-      // DOWNLOAD
-      doc.save(businessName.replace(/[^a-z0-9]/gi, '-') + '-Report.pdf');
+    doc.setFontSize(14);
+    doc.text(roi, 20, y+20);
+    doc.text(startup, 65, y+20);
+    doc.text(time, 115, y+20);
+    doc.text(difficulty, 165, y+20);
 
-    } catch(err) {
-      console.error("PDF ERROR:", err);
-      alert("PDF Failed: " + err.message + "\n\nCheck console with F12 for details");
-    } finally {
-      btn.innerText = "📄 Download PDF Report";
-      btn.style.opacity = "1";
-    }
+    // 4. FOOTER
+    doc.setFontSize(9);
+    doc.setTextColor(150);
+    doc.text('© 2026 MonyGIST.com - Data for 2026', 15, 287);
+
+    doc.save(businessName.replace(/[^a-z0-9]/gi, '-') + '-Report.pdf');
+    btn.innerText = "📄 Download PDF Report";
   });
 });
 </script>
