@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial Policy - MonyGIST</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>:root{--primary:#22c55e;--bg:#f9fafb}*{box-sizing:border-box}body{font-family:'Inter';background:var(--bg);margin:0;line-height:1.8}.container{width:100%;max-width:800px;margin:0 auto;padding:24px 16px}h1{font-family:'Anton';font-size:32px}h2{font-size:20px;margin-top:24px}.card{background:#fff;padding:20px;border-radius:16px;margin:16px 0}a{color:var(--primary)}</style></head><body>
+<div class="container">
+<a href="index.html">← Back</a>
+<h1>Editorial Policy & Methodology</h1>
+<p>MonyGIST is committed to transparency and accuracy.</p>
+
+<div class="card">
+<h2>How We Research</h2>
+<ol>
+<li><b>Data Collection:</b> We pull from US Census Bureau, SBA, BLS, Statista 2026</li>
+<li><b>Analysis:</b> Founder Ilemobayo Tolulope analyzes profit margins, startup costs, and competition</li>
+<li><b>Fact-Checking:</b> Every number is cross-referenced with 2+ sources</li>
+<li><b>Updates:</b> Business data is reviewed every 6 months</li>
+</ol>
+</div>
+
+<div class="card">
+<h2>Independence</h2>
+<p>MonyGIST does not accept payment to feature businesses. Rankings are based only on data, not sponsorships.</p>
+</div>
+
+<div class="card">
+<h2>Corrections</h2>
+<p>Found an error? Email support@monygist.com. We correct mistakes within 48 hours.</p>
+</div>
+</div>
+</body></html>
