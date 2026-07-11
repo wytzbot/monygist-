@@ -1,5 +1,5 @@
 const BUSINESS_DATA = [
-  // FOOD - 10
+
   {"id":"coffeeshop","name":"Specialty Coffee Shop","cat":"Food","startup":{"US":85000},"profit":{"US":12000},"comp":"Starbucks, Dunkin, Local cafes","beat":"Loyalty app + Unique drinks + Community events","limit":"High rent + Labor costs + Coffee bean prices","mistake":"Buying too much equipment upfront","locations":"College towns, Downtown, Suburbs with $75k+ income"},
   {"id":"foodtruck","name":"Gourmet Food Truck","cat":"Food","startup":{"US":65000},"profit":{"US":8000},"comp":"Restaurants, Other food trucks","beat":"Instagram marketing + Festival circuit + Unique menu","limit":"Permits + Weather + Commissary costs","mistake":"No clear niche","locations":"Austin TX, Portland OR, Miami FL"},
   {"id":"bakery","name":"Artisan Bakery","cat":"Food","startup":{"US":120000},"profit":{"US":15000},"comp":"Panera, Grocery stores","beat":"Organic ingredients + Wedding cakes + Wholesale","limit":"Early hours + Ingredient costs","mistake":"No wholesale contracts","locations":"Affluent suburbs, Farmers markets"},
@@ -11,7 +11,7 @@ const BUSINESS_DATA = [
   {"id":"donuts","name":"Donut Shop","cat":"Food","startup":{"US":80000},"profit":{"US":8500},"comp":"Dunkin, Krispy Kreme","beat":"Gourmet donuts + Coffee + Instagram","limit":"Early mornings + Sugar costs","mistake":"No delivery","locations":"Office areas, Drive-thru"},
   {"id":"healthy","name":"Healthy Meal Prep","cat":"Food","startup":{"US":40000},"profit":{"US":7000},"comp":"HelloFresh, Local meal prep","beat":"Macro counting + Delivery + Corporate","limit":"Fridge storage + Delivery","mistake":"No subscription model","locations":"Affluent suburbs, Near offices"},
 
-  // SERVICE - 10
+
   {"id":"cleaning","name":"Residential Cleaning","cat":"Service","startup":{"US":15000},"profit":{"US":6500},"comp":"Merry Maids, Molly Maid","beat":"Eco products + Subscription + Background checks","limit":"Staff turnover + Insurance","mistake":"Underpricing","locations":"Suburbs with $100k+ homes"},
   {"id":"landscaping","name":"Landscaping Business","cat":"Service","startup":{"US":35000},"profit":{"US":8500},"comp":"TruGreen, Local landscapers","beat":"Smart irrigation + Maintenance contracts","limit":"Seasonal + Equipment","mistake":"No contracts","locations":"Suburbs, HOA communities"},
   {"id":"tutoring","name":"Online Tutoring","cat":"Service","startup":{"US":5000},"profit":{"US":5000},"comp":"Wyzant, Kaplan","beat":"Specialized SAT/ACT + Guarantee scores","limit":"Client acquisition","mistake":"No niche","locations":"Nationwide - Remote"},
@@ -23,7 +23,7 @@ const BUSINESS_DATA = [
   {"id":"housepainting","name":"House Painting","cat":"Service","startup":{"US":25000},"profit":{"US":8000},"comp":"CertaPro, Local painters","beat":"Eco paint + 3yr warranty + Clean","limit":"Weather + Labor","mistake":"No referrals","locations":"Suburbs"},
   {"id":"moving","name":"Moving Company","cat":"Service","startup":{"US":50000},"profit":{"US":10000},"comp":"U-Haul, Two Men and a Truck","beat":"Packing + Storage + Insurance","limit":"Trucks + Fuel + Staff","mistake":"No deposits","locations":"Major metros"},
 
-  // ONLINE - 10
+
   {"id":"agency","name":"Digital Marketing Agency","cat":"Online","startup":{"US":5000},"profit":{"US":15000},"comp":"Agencies, Freelancers","beat":"Guaranteed ROI + Niche focus","limit":"Client retention","mistake":"Taking any client","locations":"Remote - Target NYC, LA"},
   {"id":"saas","name":"SaaS Software","cat":"Online","startup":{"US":50000},"profit":{"US":25000},"comp":"Big tech, Startups","beat":"Solve 1 problem + Free trial","limit":"Development + Churn","mistake":"Building too much","locations":"Remote - SF, Austin"},
   {"id":"course","name":"Online Course Business","cat":"Online","startup":{"US":8000},"profit":{"US":12000},"comp":"Udemy, Coursera","beat":"High ticket + Community + Coaching","limit":"Content creation","mistake":"No email list","locations":"Remote"},
@@ -35,7 +35,7 @@ const BUSINESS_DATA = [
   {"id":"print","name":"Print on Demand","cat":"Online","startup":{"US":2000},"profit":{"US":5000},"comp":"Etsy sellers","beat":"Niche designs + TikTok + Quality","limit":"Ad costs","mistake":"Generic designs","locations":"Remote"},
   {"id":"consulting","name":"Business Consulting","cat":"Online","startup":{"US":3000},"profit":{"US":18000},"comp":"McKinsey, Freelancers","beat":"Niche + Results + Case studies","limit":"Client acquisition","mistake":"No portfolio","locations":"Remote"},
 
-  // FINANCE - 10
+
   {"id":"atm","name":"ATM Business","cat":"Finance","startup":{"US":15000},"profit":{"US":4000},"comp":"Banks, Other ATM owners","beat":"High traffic + Surcharge + Maintenance","limit":"Cash + Vandalism","mistake":"Bad location","locations":"Convenience stores, Bars"},
   {"id":"tax","name":"Tax Preparation","cat":"Finance","startup":{"US":25000},"profit":{"US":11000},"comp":"H&R Block, TurboTax","beat":"Year-round + Audit support","limit":"Seasonal + Licensing","mistake":"Only Jan-Apr","locations":"All suburbs"},
   {"id":"bookkeeping","name":"Bookkeeping Service","cat":"Finance","startup":{"US":8000},"profit":{"US":7000},"comp":"QuickBooks, Accountants","beat":"Cloud + Monthly + Advisory","limit":"Client retention","mistake":"No software","locations":"Remote"},
@@ -47,7 +47,7 @@ const BUSINESS_DATA = [
   {"id":"loan","name":"Business Loan Broker","cat":"Finance","startup":{"US":15000},"profit":{"US":12000},"comp":"Banks, Online lenders","beat":"Multiple options + Fast approval","limit":"Regulations","mistake":"One lender","locations":"Remote"},
   {"id":"pos","name":"POS Business","cat":"Finance","startup":{"US":20000},"profit":{"US":6000},"comp":"Square, Toast","beat":"Service + Lower fees + Support","limit":"Competition","mistake":"No niche","locations":"Restaurants, Retail"},
 
-  // HEALTH - 10
+
   {"id":"gym","name":"Boutique Fitness Studio","cat":"Health","startup":{"US":150000},"profit":{"US":18000},"comp":"Planet Fitness, CrossFit","beat":"Community + Classes + App","limit":"Rent + Equipment","mistake":"5yr lease","locations":"Affluent suburbs"},
   {"id":"yoga","name":"Yoga Studio","cat":"Health","startup":{"US":80000},"profit":{"US":9000},"comp":"Other studios","beat":"Memberships + Retreats + Online","limit":"Rent + Teachers","mistake":"No retention","locations":"Urban, Wellness areas"},
   {"id":"mental","name":"Mental Health Practice","cat":"Health","startup":{"US":30000},"profit":{"US":15000},"comp":"Therapists, Telehealth","beat":"Specialty + Telehealth + Insurance","limit":"License + No-show","mistake":"No insurance","locations":"All cities"},
