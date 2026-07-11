@@ -2,7 +2,7 @@
   "name": "MonyGIST - $10K Business Ideas",
   "short_name": "MonyGIST",
   "description": "Data-driven business ideas with real US profit numbers and startup costs",
-  "start_url": "/",
+  "start_url": "https://wytzbot.github.io/monygist-/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#f9fafb",
