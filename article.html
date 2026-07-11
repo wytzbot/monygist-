@@ -4,15 +4,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--primary:#22c55e;--bg:#f9fafb;--card:#fff}
-body{font-family:'Inter';background:var(--bg);margin:0;padding:0}
-header{padding:20px;background:#fff;border-bottom:1px solid #eee}
-header a{color:var(--primary);text-decoration:none;font-weight:600;font-family:Inter}
-.container{max-width:700px;margin:0 auto;padding:20px}
-h1{font-family:'Anton';font-size:36px;margin:10px 0}
+body{font-family:'Inter';background:var(--bg);margin:0;line-height:1.7}
+header{padding:20px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0}
+header a{color:var(--primary);text-decoration:none;font-weight:600}
+.container{max-width:750px;margin:0 auto;padding:20px}
+h1{font-family:'Anton';font-size:38px;margin:10px 0}
+h2{font-size:22px;margin-top:25px;color:#111}
 .card{background:var(--card);padding:20px;border-radius:16px;margin:15px 0;box-shadow:0 4px 10px rgba(0,0,0,0.05)}
-.stat{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f1f1f1;font-size:16px}
+.stat{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f1f1f1;font-size:16px}
 .stat b{color:var(--primary);font-weight:700}
+.highlight{background:#f0fff4;border-left:4px solid var(--primary);padding:15px;border-radius:8px;margin:15px 0}
 .btn{width:100%;padding:16px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:18px;margin-top:20px;cursor:pointer}
+ul{padding-left:20px}
 </style>
 <script src="data.js"></script>
 </head><body>
@@ -26,27 +29,58 @@ const business = BUSINESS_DATA.find(b => b.id === bizId);
 const div = document.getElementById('biz-details');
 
 if(business){
-  const roi = ((business.profit.US*12)/business.startup.US*100).toFixed(1);
+  const annual = business.profit.US * 12;
+  const roi = ((annual)/business.startup.US*100).toFixed(1);
+  const payback = (business.startup.US / business.profit.US).toFixed(1);
+  
   div.innerHTML = `
     <h1>${business.name}</h1>
-    <p style="color:#666">Category: ${business.cat}</p>
+    <p style="color:#666;font-size:16px">Category: ${business.cat}</p>
+
     <div class="card">
+      <h2>💰 The Numbers</h2>
       <div class="stat"><span>Startup Cost</span><b>$${business.startup.US.toLocaleString()}</b></div>
       <div class="stat"><span>Monthly Profit</span><b>$${business.profit.US.toLocaleString()}</b></div>
-      <div class="stat"><span>Annual Profit</span><b>$${(business.profit.US*12).toLocaleString()}</b></div>
-      <div class="stat"><span>ROI</span><b>${roi}% / year</b></div>
+      <div class="stat"><span>Annual Profit</span><b>$${annual.toLocaleString()}</b></div>
+      <div class="stat"><span>ROI</span><b>${roi}% per year</b></div>
+      <div class="stat"><span>Payback Period</span><b>${payback} months</b></div>
+      <div class="highlight">
+        <b>What this means:</b> If you invest $${business.startup.US.toLocaleString()}, you can get your money back in ${payback} months. After that, it's $${business.profit.US.toLocaleString()} profit every month.
+      </div>
     </div>
+
     <div class="card">
-      <p><b>Competition:</b> ${business.comp}</p>
-      <p><b>How to Beat Them:</b> ${business.beat}</p>
-      <p><b>Biggest Limitation:</b> ${business.limit}</p>
-      <p><b>Common Mistake:</b> ${business.mistake}</p>
-      <p><b>Best Locations:</b> ${business.locations}</p>
+      <h2>📖 What Is This Business?</h2>
+      <p>The <b>${business.name}</b> is in the ${business.cat} category. 
+      This business works by ${business.beat.toLowerCase()}. 
+      Your main customers will come from ${business.locations.toLowerCase()}.</p>
+      <p>To succeed here, you need to focus on beating the competition: ${business.comp}.</p>
     </div>
-    <button class="btn" onclick="alert('AI Plan for ${business.name} - Coming Soon')">Generate AI Business Plan</button>
+
+    <div class="card">
+      <h2>⚠️ Challenges to Know</h2>
+      <p><b>Biggest Limitation:</b> ${business.limit}</p>
+      <p><b>Common Mistake Beginners Make:</b> ${business.mistake}</p>
+      <div class="highlight">
+        <b>Pro Tip:</b> Avoid the mistake above by planning for it before you start. Most new businesses fail because of this.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🚀 How to Get Started</h2>
+      <ul>
+        <li><b>Step 1:</b> Validate demand in ${business.locations}</li>
+        <li><b>Step 2:</b> Budget $${business.startup.US.toLocaleString()} for startup costs</li>
+        <li><b>Step 3:</b> Differentiate yourself by ${business.beat}</li>
+        <li><b>Step 4:</b> Watch out for ${business.limit}</li>
+        <li><b>Step 5:</b> Scale once you hit $${business.profit.US.toLocaleString()}/month consistently</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="alert('AI Business Plan Generator for ${business.name} is Coming Soon')">Generate Full 30-Page AI Business Plan</button>
   `;
 } else {
-  div.innerHTML = `<h1>Business Not Found</h1><p>The ID "${bizId}" doesn't exist. Check data.js for typos.</p>`;
+  div.innerHTML = `<h1>Business Not Found</h1><p>The ID "${bizId}" doesn't exist in data.js</p>`;
 }
 </script>
 </body></html>
