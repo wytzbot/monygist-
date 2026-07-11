@@ -4,46 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Business Details - MonyGIST</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body{font-family:Arial;background:#f5f5f5;margin:0;padding:20px}
+header a{color:#007bff;text-decoration:none}
+.card{background:#fff;padding:20px;border-radius:10px;margin-top:15px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+.card h2{margin-top:0;color:#333}
+button{background:#28a745;color:#fff;border:none;padding:12px 20px;border-radius:5px;font-size:16px;margin-top:15px;cursor:pointer}
+</style>
 <script src="data.js"></script>
 </head>
 <body>
-<header><a href="index.html">← Back</a><h1 id="biz-name">Loading...</h1></header>
+<header><a href="index.html">← Back</a></header>
 
-<div class="container" id="biz-details">
-  <!-- Data will load here -->
+<div id="biz-details">
+  <h1 id="biz-name">Loading...</h1>
 </div>
 
 <script>
-// 1. Get ID from URL ?id=coffee-shop
 const params = new URLSearchParams(window.location.search);
 const bizId = params.get('id');
-
-// 2. Find business in data.js
 const business = BUSINESS_DATA.find(b => b.id === bizId);
+
+const detailsDiv = document.getElementById('biz-details');
 
 if(business){
   document.getElementById('biz-name').innerText = business.name;
   
-  document.getElementById('biz-details').innerHTML = `
+  detailsDiv.innerHTML = `
+    <h1>${business.name}</h1>
     <div class="card">
       <h2>Category: ${business.cat}</h2>
       <p><b>Startup Cost:</b> $${business.startup.US.toLocaleString()}</p>
       <p><b>Monthly Profit:</b> $${business.profit.US.toLocaleString()}</p>
+      <p><b>Annual Profit:</b> $${(business.profit.US*12).toLocaleString()}</p>
+      <p><b>ROI:</b> ${((business.profit.US*12)/business.startup.US*100).toFixed(1)}%</p>
+      <hr>
       <p><b>Competition:</b> ${business.comp}</p>
       <p><b>How to Beat Them:</b> ${business.beat}</p>
       <p><b>Biggest Limitation:</b> ${business.limit}</p>
       <p><b>Common Mistake:</b> ${business.mistake}</p>
       <p><b>Best Locations:</b> ${business.locations}</p>
     </div>
-    <button onclick="generatePlan('${business.id}')">Generate AI Business Plan</button>
+    <button onclick="alert('AI Plan Generator for ${business.name} - Coming Soon')">Generate AI Business Plan</button>
   `;
 } else {
-  document.getElementById('biz-details').innerHTML = "<h2>Business Not Found</h2>";
-}
-
-function generatePlan(id){
-  alert("AI Business Plan for " + id + "\nComing Next - We will build this page")
+  detailsDiv.innerHTML = `<h1>Business Not Found</h1><p>ID: ${bizId} doesn't exist in data.js</p>`;
 }
 </script>
 </body>
