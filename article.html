@@ -9,12 +9,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .stat-card { @apply bg-gray-50 rounded-xl p-4 text-center border border-gray-200; }
-    .stat-label { @apply text-xs text-gray-500 font-semibold uppercase tracking-wide; }
-    .stat-value { @apply text-xl font-bold text-gray-900 mt-1 block; }
-    .section { @apply mb-10; }
-    .section h2 { @apply text-2xl font-bold text-gray-900 mb-4 border-b pb-2; }
-    .section h3 { @apply text-lg font-semibold text-gray-800 mt-4 mb-2; }
+   .stat-card { background: #f9fafb; border-radius: 0.75rem; padding: 1rem; text-align: center; border: 1px solid #e5e7eb; }
+   .stat-label { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+   .stat-value { font-size: 1.25rem; font-weight: 700; color: #111827; margin-top: 0.25rem; display: block; }
+   .section { margin-bottom: 2.5rem; }
+   .section h2 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
+   .section h3 { font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-top: 1rem; margin-bottom: 0.5rem; }
   </style>
 </head>
 <body class="bg-white text-gray-700">
@@ -30,149 +30,124 @@
   <!-- MAIN ARTICLE -->
   <main class="max-w-5xl mx-auto px-4 py-10">
     
-    <!-- HERO -->
     <div class="mb-8">
       <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">USA 2026 REPORT</span>
-      <h1 id="businessName" class="text-4xl font-extrabold mt-3 mb-2">E-commerce Store</h1>
-      <p id="businessSubtitle" class="text-lg text-gray-600">A complete data-driven breakdown to start and scale in the US economy</p>
+      <h1 id="businessName" class="text-4xl font-extrabold mt-3 mb-2">Loading...</h1>
+      <p id="businessSubtitle" class="text-lg text-gray-600">Loading data...</p>
     </div>
 
-    <!-- STATS GRID - PDF GRABS THESE -->
+    <!-- STATS GRID -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-      <div class="stat-card"><div class="stat-label">Startup Cost</div><div class="stat-value">$2,000 - $10,000</div></div>
-      <div class="stat-card"><div class="stat-label">Avg Monthly Profit</div><div class="stat-value">$5,000 - $30,000</div></div>
-      <div class="stat-card"><div class="stat-label">Time to Profit</div><div class="stat-value">3-6 Months</div></div>
-      <div class="stat-card"><div class="stat-label">Risk Level</div><div class="stat-value">Medium</div></div>
+      <div class="stat-card"><div class="stat-label">Startup Cost</div><div id="startup" class="stat-value">N/A</div></div>
+      <div class="stat-card"><div class="stat-label">Avg Monthly Profit</div><div id="profit" class="stat-value">N/A</div></div>
+      <div class="stat-card"><div class="stat-label">Time to Profit</div><div id="time" class="stat-value">N/A</div></div>
+      <div class="stat-card"><div class="stat-label">Risk Level</div><div id="risk" class="stat-value">N/A</div></div>
     </div>
 
-    <!-- SECTION 1: STARTUP COST -->
-    <section class="section">
-      <h2>1. Startup Cost</h2>
-      <p>Starting an E-commerce Store in the USA in 2026 requires upfront capital for inventory, ads, and tools. Based on SBA.gov data, 23% of small e-commerce businesses start with under $5K.</p>
-      <ul class="list-disc pl-6 space-y-2">
-        <li><b>LLC + Website:</b> $200 - $500. Use Shopify $39/mo + domain.</li>
-        <li><b>Initial Inventory:</b> $1,000 - $5,000. Use US suppliers to avoid 2026 tariffs.</li>
-        <li><b>Ads Budget:</b> $1,000 minimum for Facebook/TikTok testing.</li>
-        <li><b>Tools + Apps:</b> $300/mo for email, reviews, shipping software.</li>
-      </ul>
-      <p class="mt-3"><b>Total to Launch:</b> $2,500 - $10,000</p>
-    </section>
-
-    <!-- SECTION 2: PROFIT -->
-    <section class="section">
-      <h2>2. Profit Potential</h2>
-      <p>Average e-commerce profit margin in the US is 10-20% according to IBISWorld 2026. With good product selection, you can do better.</p>
-      <p><b>Example Math:</b> $50,000/mo revenue x 20% margin = $10,000/mo profit. Top 10% of Shopify stores do $1M+/year.</p>
-      <p>Profit scales with ad spend. Every $1 in ads should return $3-$4 in revenue by month 6.</p>
-    </section>
-
-    <!-- SECTION 3: LIMITATIONS -->
-    <section class="section">
-      <h2>3. Limitations</h2>
-      <p>1. <b>Ad Costs:</b> Facebook CPM is up 22% in 2026. Customer acquisition is expensive.</p>
-      <p>2. <b>Competition:</b> Amazon and Temu dominate price. Hard to compete on commodity products.</p>
-      <p>3. <b>Returns:</b> Average return rate is 16.5% for apparel. This eats profit.</p>
-      <p>4. <b>Cash Flow:</b> You pay for inventory 60 days before you get paid by customers.</p>
-    </section>
-
-    <!-- SECTION 4: BEST LOCATIONS -->
-    <section class="section">
-      <h2>4. Best Locations</h2>
-      <p>For US e-commerce, "location" means 2 things: where to ship from and who to target.</p>
-      <h3>Best States to Target:</h3>
-      <p><b>California, Texas, Florida, New York.</b> They make up 40% of all US online spending. Target them with ads.</p>
-      <h3>Best States to Warehouse:</h3>
-      <p><b>Texas, Nevada, Florida.</b> No state income tax + central shipping zones = 2-day delivery to 80% of US.</p>
-    </section>
-
-    <!-- SECTION 5: COMPETITORS STRATEGY -->
-    <section class="section">
-      <h2>5. Competitors Strategy</h2>
-      <p><b>Amazon:</b> Strategy = Price + Speed. 2-day Prime shipping. Weakness: Generic brands.</p>
-      <p><b>Shopify Brands:</b> Strategy = Story + Community. Gymshark, Glossier. Weakness: High ad spend.</p>
-      <p><b>Temu/Shein:</b> Strategy = Ultra low price. Weakness: 2-week shipping + poor quality.</p>
-    </section>
-
-    <!-- SECTION 6: HOW TO BEAT COMPETITORS -->
-    <section class="section">
-      <h2>6. How to Beat Competitors</h2>
-      <ol class="list-decimal pl-6 space-y-2">
-        <li><b>Niche Down:</b> Don't sell "shoes". Sell "barefoot shoes for runners". Less competition.</li>
-        <li><b>Brand > Product:</b> People pay 30% more for brands they trust. Use UGC video ads.</li>
-        <li><b>Speed:</b> Offer 2-day shipping with ShipBob or US-based 3PL. Beat Temu.</li>
-        <li><b>Bundles:</b> Amazon can't do custom bundles. Increase AOV by 25%.</li>
-      </ol>
-    </section>
-
-    <!-- SECTION 7: POSSIBLE LOSS AND REASONS -->
-    <section class="section">
-      <h2>7. Possible Loss and Reasons</h2>
-      <p>1. <b>Bad Product:</b> 70% of new stores fail because they sell products with no demand. Validate with TikTok first.</p>
-      <p>2. <b>Ad Burn:</b> Spending $5K on ads with no ROAS. Fix: Start with $50/day testing.</p>
-      <p>3. <b>Inventory:</b> Buying 1000 units that don't sell. Start with 50-100 units or use dropshipping.</p>
-      <p>4. <b>Account Ban:</b> Facebook/Google can ban ad accounts. Always have 2 backup accounts.</p>
-    </section>
-
-    <!-- SECTION 8: PLANS FOR SMALL SCALE -->
-    <section class="section">
-      <h2>8. Plans for Small Scale</h2>
-      <p><b>Phase 1: $0 - $3K/mo:</b> 1 product, Shopify Basic, $50/day ads. Do fulfillment yourself.</p>
-      <p><b>Phase 2: $3K - $20K/mo:</b> Hire VA for customer service. Use 3PL. Add 2 more products.</p>
-      <p><b>Phase 3: $20K+/mo:</b> Build email list to 10K. Launch on Amazon. Get into retail.</p>
-    </section>
-
-    <!-- SECTION 9: BEST MARKETING STRATEGIES -->
-    <section class="section">
-      <h2>9. Best Marketing Strategies for 2026</h2>
-      <p>1. <b>TikTok Organic:</b> #1 driver of traffic in 2026. Post 3x/day product demos.</p>
-      <p>2. <b>Meta Ads:</b> Use Advantage+ Shopping campaigns. Target "Purchasers in last 7 days".</p>
-      <p>3. <b>Email/SMS:</b> Klaviyo flows make up 30% of revenue for top stores. Abandoned cart = $.</p>
-      <p>4. <b>Influencers:</b> Pay 20 micro-influencers $200 each instead of 1 big influencer.</p>
-    </section>
+    <!-- 9 SECTIONS -->
+    <section class="section"><h2>1. Startup Cost</h2><div id="section1"></div></section>
+    <section class="section"><h2>2. Profit Potential</h2><div id="section2"></div></section>
+    <section class="section"><h2>3. Limitations</h2><div id="section3"></div></section>
+    <section class="section"><h2>4. Best Locations in USA</h2><div id="section4"></div></section>
+    <section class="section"><h2>5. Competitors Strategy</h2><div id="section5"></div></section>
+    <section class="section"><h2>6. How to Beat Competitors</h2><div id="section6"></div></section>
+    <section class="section"><h2>7. Possible Loss and Reasons</h2><div id="section7"></div></section>
+    <section class="section"><h2>8. Plans for Small Scale</h2><div id="section8"></div></section>
+    <section class="section"><h2>9. Best Marketing Strategies</h2><div id="section9"></div></section>
 
     <!-- SOURCES -->
     <section class="section bg-gray-50 p-6 rounded-xl">
       <h3 class="text-lg font-bold mb-3">Sources Cited</h3>
-      <ol class="list-decimal pl-6 text-sm text-gray-600 space-y-1">
-        <li>U.S. Small Business Administration - SBA.gov 2026 Startup Report</li>
-        <li>IBISWorld - Online Retail in the US, Industry Report 45411, Jan 2026</li>
-        <li>Shopify - State of Commerce Report 2026</li>
-        <li>National Retail Federation - NRF.com Returns Data 2025</li>
-      </ol>
+      <ol id="sources" class="list-decimal pl-6 text-sm text-gray-600 space-y-1"></ol>
     </section>
 
-    <!-- AI TOOLS BUTTON - ONLY 1 -->
+    <!-- 1 AI TOOLS BUTTON -->
     <section class="section mt-12 text-center border-t pt-8">
       <h2 class="text-2xl font-bold mb-3">Need Help Executing This?</h2>
-      <p class="mb-4">Use our AI to generate business plans, ad copy, and product research for this idea.</p>
-      <a href="/tools.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition">Open AI Tools</a>
+      <p class="mb-4">Use our AI to generate business plans, ad copy, and research for this idea.</p>
+      <a href="/tools.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition inline-block">Open AI Tools</a>
     </section>
 
   </main>
 
-  <!-- PDF SCRIPT -->
+  <!-- LOAD JSPDF FIRST -->
   <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <!-- DATABASE + LOGIC -->
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('downloadPDF');
-    if (!btn) return; 
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      const name = document.getElementById('businessName').innerText;
-      const values = [...document.querySelectorAll('.stat-value')].map(el => el.innerText);
+    const businessData = {
+      "ecommerce": {
+        name: "E-commerce Store",
+        subtitle: "Sell physical products online with Shopify and TikTok ads",
+        startup: "$2,000 - $10,000",
+        profit: "$5,000 - $30,000",
+        time: "3-6 Months",
+        risk: "Medium",
+        s1: `<p>Starting in the USA in 2026 requires $2.5K-$10K. <b>LLC + Shopify:</b> $200-$500. <b>Inventory:</b> $1,000-$5,000. <b>Ads:</b> $1,000 to test. With 2026 tariffs, use US suppliers.</p>`,
+        s2: `<p>Average margin is 10-20%. <b>Example:</b> $50K/mo revenue x 20% = $10K/mo profit. IBISWorld 2026 reports top 10% Shopify stores do $1M+/year.</p>`,
+        s3: `<p>1. <b>Ad Costs:</b> Facebook CPM up 22% in 2026. 2. <b>Competition:</b> Amazon and Temu dominate price. 3. <b>Returns:</b> 16.5% avg return rate for apparel.</p>`,
+        s4: `<p><b>Target Customers:</b> CA, TX, FL, NY. They are 40% of US online spending. <b>Warehouse:</b> TX, NV, FL for no income tax + 2-day shipping.</p>`,
+        s5: `<p><b>Amazon:</b> Price + Speed. Weakness: Generic brands. <b>Shopify Brands:</b> Story + Community. Weakness: High ad spend. <b>Temu:</b> Ultra low price.</p>`,
+        s6: `<ol class="list-decimal pl-6"><li><b>Niche Down:</b> Don't sell "shoes". Sell "barefoot shoes for runners".</li><li><b>Brand > Product:</b> People pay 30% more for trusted brands.</li></ol>`,
+        s7: `<p>1. <b>Bad Product:</b> 70% fail from no demand. Validate on TikTok first. 2. <b>Ad Burn:</b> $5K spent with no ROAS. Start $50/day.</p>`,
+        s8: `<p><b>Phase 1: $0-$3K/mo:</b> 1 product, $50/day ads. <b>Phase 2: $3K-$20K/mo:</b> Hire VA + 3PL. <b>Phase 3: $20K+/mo:</b> Build email list to 10K.</p>`,
+        s9: `<p>1. <b>TikTok Organic:</b> #1 driver in 2026. 2. <b>Meta Ads:</b> Advantage+ Shopping. 3. <b>Email/SMS:</b> Klaviyo makes 30% of revenue.</p>`,
+        sources: ["SBA.gov 2026 Startup Report", "IBISWorld - Online Retail 45411, Jan 2026", "Shopify State of Commerce 2026"]
+      },
+      "credit-repair": {
+        name: "Credit Repair Business",
+        subtitle: "Help Americans fix credit and get approved for loans",
+        startup: "$1,500 - $5,000",
+        profit: "$8,000 - $25,000",
+        time: "60-90 Days",
+        risk: "Medium",
+        s1: `<p>Start for under $5K. <b>LLC:</b> $50-$500. <b>Software:</b> Credit Repair Cloud $99/mo. <b>Bond/Insurance:</b> $300-$800/yr required in CA, TX, FL.</p>`,
+        s2: `<p>Pricing: $99-$199 setup + $99-$149/mo. Avg client LTV = $1,044. To hit $10K/mo you need 68 clients. Gross margin 85%.</p>`,
+        s3: `<p>1. <b>CROA Law:</b> Illegal to charge before services. 2. <b>State License:</b> MD, SC, FL require license. $10K penalty.</p>`,
+        s4: `<p><b>Best States:</b> MS, AL, LA, GA, TX. Lowest credit scores. <b>Best Cities:</b> Houston, Atlanta, Dallas.</p>`,
+        s5: `<p><b>Lexington Law:</b> $400 setup + $129/mo. Weakness: 30 day wait. <b>Sky Blue:</b> $79/mo. Weakness: No app.</p>`,
+        s6: `<ol class="list-decimal pl-6"><li><b>Speed:</b> First letters in 7 days vs 30 days.</li><li><b>Tech:</b> Give mobile portal to track disputes.</li></ol>`,
+        s7: `<p>1. <b>Ad Burn:</b> $3K on bad funnel = $0. Use quiz funnel. 2. <b>FTC Lawsuit:</b> Violating CROA = $10K fine.</p>`,
+        s8: `<p><b>Month 1-2:</b> 10 clients from Facebook + TikTok. $1,500/mo. <b>Month 3-4:</b> Hire VA $500/mo. $50/day ads.</p>`,
+        s9: `<p>1. <b>TikTok/Shorts:</b> "3 things killing your credit". 2. <b>Google SEO:</b> "credit repair near me Atlanta".</p>`,
+        sources: ["FTC.gov CROA 2024 Report", "Experian State of Credit 2025", "IBISWorld Credit Counseling 56144"]
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id') || 'ecommerce';
+      const data = businessData[id] || businessData['ecommerce']; // fallback
+
+      // FILL DATA
+      document.getElementById('businessName').innerText = data.name;
+      document.getElementById('businessSubtitle').innerText = data.subtitle;
+      document.getElementById('startup').innerText = data.startup;
+      document.getElementById('profit').innerText = data.profit;
+      document.getElementById('time').innerText = data.time;
+      document.getElementById('risk').innerText = data.risk;
+      for(let i=1; i<=9; i++) document.getElementById(`section${i}`).innerHTML = data[`s${i}`];
       
-      doc.setFontSize(18);
-      doc.text(name + ' - Business Report', 15, 20);
-      doc.setFontSize(12);
-      doc.text(`Startup Cost: ${values[0]}`, 15, 35);
-      doc.text(`Monthly Profit: ${values[1]}`, 15, 42);
-      doc.text(`Time to Profit: ${values[2]}`, 15, 49);
-      doc.text(`Risk Level: ${values[3]}`, 15, 56);
-      doc.save(name + '-Report.pdf');
+      const sourcesList = document.getElementById('sources');
+      sourcesList.innerHTML = '';
+      data.sources.forEach(src => { sourcesList.innerHTML += `<li>${src}</li>`; });
+
+      // PDF SCRIPT
+      const btn = document.getElementById('downloadPDF');
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFontSize(18);
+        doc.text(data.name + ' - Business Report', 15, 20);
+        doc.setFontSize(12);
+        doc.text(`Startup Cost: ${data.startup}`, 15, 35);
+        doc.text(`Monthly Profit: ${data.profit}`, 15, 42);
+        doc.text(`Time to Profit: ${data.time}`, 15, 49);
+        doc.text(`Risk Level: ${data.risk}`, 15, 56);
+        doc.save(data.name + '-Report.pdf');
+      });
     });
-  });
   </script>
 </body>
-          </html>
+  </html>
