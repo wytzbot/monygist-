@@ -19,10 +19,11 @@
 .input{padding:12px;width:100%;margin:10px 0;border:2px solid var(--border);border-radius:8px}
 footer{background:#111827;color:#d1d5db;padding:40px 16px;margin-top:60px;font-size:14px}
 @media (min-width: 768px){
- .article{padding:60px 20px}
- .article h1{font-size:42px}
- .article h2{font-size:28px}
- .btn{width:auto;display:inline-block}
+.article{padding:60px 20px}
+.article h1{font-size:42px}
+.article h2{font-size:28px}
+.btn{width:auto;display:inline-block}
+}
 </style>
 </head><body>
 <header class="navbar"><div class="container"><a href="categories.html" class="logo">Mony<span>GIST</span></a></div></header>
@@ -40,25 +41,18 @@ footer{background:#111827;color:#d1d5db;padding:40px 16px;margin-top:60px;font-s
 </div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="data.js?v=12"></script>
 <script>
-// BUSINESS DATA
-const businesses = [
-{id:"pos",name:"POS Business",cat:"Finance",summary:"Earn on transfers and bill payments",startup:{US:2000,UK:1800,CA:2500,NG:350000},profit:{US:800,UK:700,CA:900,NG:150000},comp:"Banks and Fintechs",beat:"Offer 24/7 service and lower charges",limit:"Network downtime and cash float",mistake:"Not keeping enough cash"},
-{id:"coffee",name:"Coffee Shop",cat:"Food",summary:"$8k-$15k/month specialty coffee",startup:{US:50000,UK:40000,CA:65000,NG:8000000},profit:{US:10000,UK:8000,CA:12000,NG:1500000},comp:"Starbucks, Local cafes",beat:"Build loyalty app and unique drinks",limit:"High rent and staff costs",mistake:"Buying too much equipment upfront"},
-{id:"laundry",name:"Laundry Service",cat:"Service",summary:"Recurring weekly customers",startup:{US:15000,UK:12000,CA:18000,NG:2500000},profit:{US:3500,UK:3000,CA:4000,NG:600000},comp:"Dry cleaners",beat:"24hr pickup and delivery",limit:"Power and water costs",mistake:"Underpricing services"},
-{id:"agency",name:"Marketing Agency",cat:"Online",summary:"$500-$5000 per client monthly",startup:{US:1000,UK:800,CA:1200,NG:200000},profit:{US:6000,UK:5000,CA:7000,NG:1000000},comp:"Freelancers on Upwork",beat:"Guarantee 3x ROI in 90 days",limit:"Client retention",mistake:"Taking any client"},
-{id:"gym",name:"Boutique Gym",cat:"Health",summary:"$99/month memberships",startup:{US:100000,UK:80000,CA:120000,NG:15000000},profit:{US:18000,UK:14000,CA:20000,NG:3500000},comp:"Planet Fitness",beat:"Group classes and community",limit:"Expensive equipment",mistake:"Signing 5yr lease too early"}
-];
 
-let country = localStorage.getItem('country') || 'US';
+let country = localStorage.getItem('country') || 'NG';
 function format(n){const s={US:'$',UK:'£',CA:'C$',NG:'₦'}; return s[country]+Number(n).toLocaleString();}
 
 const urlParams = new URLSearchParams(location.search);
 const id = urlParams.get('id');
-const b = businesses.find(x=>x.id===id);
+const b = BUSINESS_DATA.find(x=>x.id===id);
 
 if(b){
-article.innerHTML = `
+document.getElementById('article').innerHTML = `
 <h1>How to Start a ${b.name} in ${country} 2026: Complete Guide</h1>
 <p><b>Startup Capital:</b> ${format(b.startup[country])} | <b>Monthly Profit:</b> ${format(b.profit[country])}</p>
 <h2>1. Overview</h2><p>${b.summary}</p>
@@ -70,7 +64,7 @@ article.innerHTML = `
 <button class="btn" onclick="document.getElementById('emailPopup').style.display='flex'">📥 Save & Download PDF</button>
 `;
 } else {
-  article.innerHTML = "<h1>Business Not Found</h1><p>Go back to <a href='categories.html'>Categories</a></p>"
+  document.getElementById('article').innerHTML = "<h1>Business Not Found</h1><p>Go back to <a href='categories.html'>Categories</a></p>"
 }
 
 async function downloadPDF(){
@@ -80,24 +74,18 @@ async function downloadPDF(){
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   
-  // HEADER
   doc.setFontSize(20);
   doc.setTextColor(34, 197, 94);
   doc.text("MonyGist Business Plan", 105, 20, {align: "center"});
-  
-  // TITLE
   doc.setFontSize(16);
   doc.setTextColor(0,0,0);
   doc.text(`${b.name} - ${country} 2026`, 20, 35);
-  
-  // DATA
   doc.setFontSize(11);
   let y = 50;
   doc.text(`Startup Capital: ${format(b.startup[country])}`, 20, y);
   doc.text(`Monthly Profit: ${format(b.profit[country])}`, 20, y+10);
   doc.text(`Country: ${country}`, 20, y+20);
   doc.text(`Email: ${email}`, 20, y+30);
-  
   y = y+45;
   doc.setFontSize(13);
   doc.setTextColor(34, 197, 94);
@@ -105,7 +93,6 @@ async function downloadPDF(){
   doc.setFontSize(10);
   doc.setTextColor(0,0,0);
   doc.text(doc.splitTextToSize(b.summary, 170), 20, y+7);
-  
   y = y+25;
   doc.setFontSize(13);
   doc.setTextColor(34, 197, 94);
@@ -113,7 +100,6 @@ async function downloadPDF(){
   doc.setFontSize(10);
   doc.setTextColor(0,0,0);
   doc.text(doc.splitTextToSize(b.comp, 170), 20, y+7);
-  
   y = y+20;
   doc.setFontSize(13);
   doc.setTextColor(34, 197, 94);
@@ -121,7 +107,6 @@ async function downloadPDF(){
   doc.setFontSize(10);
   doc.setTextColor(0,0,0);
   doc.text(doc.splitTextToSize(b.beat, 170), 20, y+7);
-  
   y = y+25;
   doc.setFontSize(13);
   doc.setTextColor(34, 197, 94);
@@ -129,12 +114,9 @@ async function downloadPDF(){
   doc.setFontSize(10);
   doc.setTextColor(0,0,0);
   doc.text(doc.splitTextToSize(b.mistake + ". " + b.limit, 170), 20, y+7);
-  
-  // FOOTER
   doc.setFontSize(8);
   doc.setTextColor(100);
   doc.text("Generated by MonyGist.com | Data from World Bank, Statista 2026", 105, 285, {align: "center"});
-  
   doc.save(`MonyGist-${b.name}-Plan.pdf`);
   document.getElementById('emailPopup').style.display='none';
   alert('Professional PDF Downloaded!');
