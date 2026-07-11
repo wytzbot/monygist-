@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head>
+hi<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Business Details - MonyGIST</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -181,14 +181,37 @@ document.addEventListener('DOMContentLoaded', function() {
     doc.text(stats[2]?.val || 'N/A', 165, y+16);
     
     // FOOTER
-    doc.setFontSize(9);
-    doc.setTextColor(150);
-    doc.text('© 2026 MonyGIST by Ilemobayo Tolulope', 15, 287);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('downloadPDF');
+  if (!btn) return; 
 
-    // DOWNLOAD
-    const fileName = businessName.replace(/[^a-z0-9]/gi, '-') + '-Report.pdf';
-    doc.save(fileName);
-  });
-});
-</script>
-</body></html>
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
+    let y = 20;
+
+    // 1. HEADER
+    doc.setFillColor(34, 197, 94);
+    doc.rect(0, 0, 210, 25, 'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.text('MonyGIST BUSINESS REPORT', 15, 16);
+    
+    // 2. GET DATA SAFELY
+    const businessName = document.querySelector('h1')?.innerText || 'Business Report';
+    const roi = document.querySelector('.roi-badge,.roi')?.innerText || 'N/A'; // added 2 options
+    
+    // Get all stat cards - works even if class is different
+    const statCards = document.querySelectorAll('.stat-card,.metric');
+    let startup = 'N/A', time = 'N/A', difficulty = 'N/A';
+    if(statCards.length >= 3){
+      startup = statCards[0].querySelector('div:first-child,.value')?.innerText || 'N/A';
+      time = statCards[1].querySelector('div:first-child,.value')?.innerText || 'N/A';
+      difficulty = statCards[2].querySelector('div:first-child,.value')?.innerText || 'N/A';
+  }
+</body>
+</html>
