@@ -7,32 +7,43 @@
   <meta name="theme-color" content="#22c55e">
   <link rel="manifest" href="/manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/data.js"></script> <!-- THIS LOADS YOUR 200 IDEAS -->
+  
+  <!-- STEP 1: LOAD YOUR 200 IDEAS FIRST -->
+  <script src="/data.js"></script>
+
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: system-ui, -apple-system, sans-serif; }
   .stat-card { background: #f9fafb; border-radius: 0.75rem; padding: 1rem; text-align: center; border: 1px solid #e5e7eb; }
-  .stat-label { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; }
-  .stat-value { font-size: 1.25rem; font-weight: 700; color: #111827; margin-top: 0.25rem; display: block; }
+  .stat-label { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-value { font-size: 1.5rem; font-weight: 800; color: #111827; margin-top: 0.25rem; display: block; }
   .section { margin-bottom: 2.5rem; }
-  .section h2 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
+  .section h2 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 1rem; border-bottom: 2px solid #22c55e; padding-bottom: 0.5rem; }
+  .section p,.section li { line-height: 1.7; }
   </style>
 </head>
 <body class="bg-white text-gray-700">
 
-  <header class="sticky top-0 bg-white border-b z-10">
+  <!-- HEADER -->
+  <header class="sticky top-0 bg-white border-b z-10 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="/" class="text-2xl font-bold text-green-600">MonyGIST</a>
-      <button id="downloadPDF" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm">📄 Download PDF</button>
+      <button id="downloadPDF" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2">
+        📄 Download PDF
+      </button>
     </div>
   </header>
 
+  <!-- MAIN ARTICLE -->
   <main class="max-w-5xl mx-auto px-4 py-10">
+    
+    <!-- TITLE -->
     <div class="mb-8">
-      <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">USA 2026 REPORT</span>
-      <h1 id="businessName" class="text-4xl font-extrabold mt-3 mb-2">Loading...</h1>
+      <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">USA 2026 REPORT</span>
+      <h1 id="businessName" class="text-4xl font-extrabold mt-3 mb-2 text-gray-900">Loading...</h1>
       <p id="businessSubtitle" class="text-lg text-gray-600">Loading data...</p>
     </div>
 
+    <!-- STATS GRID -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
       <div class="stat-card"><div class="stat-label">Startup Cost</div><div id="startup" class="stat-value">N/A</div></div>
       <div class="stat-card"><div class="stat-label">Avg Monthly Profit</div><div id="profit" class="stat-value">N/A</div></div>
@@ -40,67 +51,94 @@
       <div class="stat-card"><div class="stat-label">Risk Level</div><div id="risk" class="stat-value">N/A</div></div>
     </div>
 
-    <section class="section"><h2>1. Startup Cost</h2><div id="section1"></div></section>
-    <section class="section"><h2>2. Profit Potential</h2><div id="section2"></div></section>
-    <section class="section"><h2>3. Limitations</h2><div id="section3"></div></section>
-    <section class="section"><h2>4. Best Locations in USA</h2><div id="section4"></div></section>
-    <section class="section"><h2>5. Competitors Strategy</h2><div id="section5"></div></section>
-    <section class="section"><h2>6. How to Beat Competitors</h2><div id="section6"></div></section>
-    <section class="section"><h2>7. Possible Loss and Reasons</h2><div id="section7"></div></section>
-    <section class="section"><h2>8. Plans for Small Scale</h2><div id="section8"></div></section>
-    <section class="section"><h2>9. Best Marketing Strategies</h2><div id="section9"></div></section>
+    <!-- 9 SECTIONS -->
+    <section class="section"><h2>1. Startup Cost</h2><div id="section1" class="text-gray-700"></div></section>
+    <section class="section"><h2>2. Profit Potential</h2><div id="section2" class="text-gray-700"></div></section>
+    <section class="section"><h2>3. Limitations</h2><div id="section3" class="text-gray-700"></div></section>
+    <section class="section"><h2>4. Best Locations in USA</h2><div id="section4" class="text-gray-700"></div></section>
+    <section class="section"><h2>5. Competitors Strategy</h2><div id="section5" class="text-gray-700"></div></section>
+    <section class="section"><h2>6. How to Beat Competitors</h2><div id="section6" class="text-gray-700"></div></section>
+    <section class="section"><h2>7. Possible Loss and Reasons</h2><div id="section7" class="text-gray-700"></div></section>
+    <section class="section"><h2>8. Plans for Small Scale</h2><div id="section8" class="text-gray-700"></div></section>
+    <section class="section"><h2>9. Best Marketing Strategies</h2><div id="section9" class="text-gray-700"></div></section>
 
-    <section class="section bg-gray-50 p-6 rounded-xl">
+    <!-- SOURCES -->
+    <section class="section bg-gray-50 p-6 rounded-xl border">
       <h3 class="text-lg font-bold mb-3">Sources Cited</h3>
       <ol id="sources" class="list-decimal pl-6 text-sm text-gray-600 space-y-1"></ol>
     </section>
 
+    <!-- AI TOOLS BUTTON -->
     <section class="section mt-12 text-center border-t pt-8">
+      <h2 class="text-2xl font-bold mb-3">Need Help Executing This?</h2>
+      <p class="mb-4 text-gray-600">Use our AI to generate business plans, ad copy, and research for this idea.</p>
       <a href="/tools.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition inline-block">Open AI Tools</a>
     </section>
+
   </main>
 
+  <!-- STEP 2: LOAD JSPDF -->
   <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <!-- STEP 3: MAIN LOGIC -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get('id');
-      const data = businessData[id]; // PULLS FROM data.js
-
-      if(!data){
-        document.getElementById('businessName').innerText = "Business Not Found";
-        document.getElementById('businessSubtitle').innerText = "Check if?id=" + id + " exists in data.js";
+      
+      // CHECK IF data.js LOADED
+      if(typeof businessData === 'undefined'){
+        document.getElementById('businessName').innerText = "Error: data.js not found";
+        document.getElementById('businessSubtitle').innerText = "Make sure /data.js exists in root folder";
         return;
       }
 
-      // FILL DATA
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      
+      // IF NO ID, SHOW FIRST BUSINESS
+      const firstKey = Object.keys(businessData)[0];
+      const data = businessData[id] || businessData[firstKey];
+
+      if(!data){
+        document.getElementById('businessName').innerText = "Business Not Found";
+        document.getElementById('businessSubtitle').innerText = "ID: " + id + " does not exist in data.js";
+        return;
+      }
+
+      // FILL ALL DATA
       document.getElementById('businessName').innerText = data.name;
       document.getElementById('businessSubtitle').innerText = data.subtitle;
       document.getElementById('startup').innerText = data.startup;
       document.getElementById('profit').innerText = data.profit;
       document.getElementById('time').innerText = data.time;
       document.getElementById('risk').innerText = data.risk;
-      for(let i=1; i<=9; i++) document.getElementById(`section${i}`).innerHTML = data[`s${i}`] || '<p>No data</p>';
-
+      
+      for(let i=1; i<=9; i++){
+        document.getElementById(`section${i}`).innerHTML = data[`s${i}`] || '<p>No data available</p>';
+      }
+      
+      // FILL SOURCES
       const sourcesList = document.getElementById('sources');
       sourcesList.innerHTML = '';
-      data.sources.forEach(src => { sourcesList.innerHTML += `<li>${src}</li>`; });
+      if(data.sources && data.sources.length > 0){
+        data.sources.forEach(src => { sourcesList.innerHTML += `<li>${src}</li>`; });
+      }
 
-      // PDF
+      // PDF DOWNLOAD
       document.getElementById('downloadPDF').addEventListener('click', function(e) {
         e.preventDefault();
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        doc.setFontSize(18);
-        doc.text(data.name + ' - Business Report', 15, 20);
+        doc.setFontSize(20);
+        doc.text(data.name, 15, 20);
         doc.setFontSize(12);
-        doc.text(`Startup Cost: ${data.startup}`, 15, 35);
-        doc.text(`Monthly Profit: ${data.profit}`, 15, 42);
-        doc.text(`Time to Profit: ${data.time}`, 15, 49);
-        doc.text(`Risk Level: ${data.risk}`, 15, 56);
+        doc.text(data.subtitle, 15, 30);
+        doc.text(`Startup Cost: ${data.startup}`, 15, 45);
+        doc.text(`Monthly Profit: ${data.profit}`, 15, 52);
+        doc.text(`Time to Profit: ${data.time}`, 15, 59);
+        doc.text(`Risk Level: ${data.risk}`, 15, 66);
         doc.save(data.name + '-Report.pdf');
       });
     });
   </script>
 </body>
-</html>
+      </html>
