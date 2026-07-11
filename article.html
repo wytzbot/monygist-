@@ -181,37 +181,77 @@ document.addEventListener('DOMContentLoaded', function() {
     doc.text(stats[2]?.val || 'N/A', 165, y+16);
     
     // FOOTER
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const btn = document.getElementById('downloadPDF');
   if (!btn) return; 
 
-  btn.addEventListener('click', function(e) {
+  btn.addEventListener('click', async function(e) {
     e.preventDefault();
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'mm', 'a4');
-    let y = 20;
+    btn.innerText = "⏳ Generating PDF...";
+    btn.style.opacity = "0.6";
 
-    // 1. HEADER
-    doc.setFillColor(34, 197, 94);
-    doc.rect(0, 0, 210, 25, 'F');
-    doc.setTextColor(255,255,255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(18);
-    doc.text('MonyGIST BUSINESS REPORT', 15, 16);
-    
-    // 2. GET DATA SAFELY
-    const businessName = document.querySelector('h1')?.innerText || 'Business Report';
-    const roi = document.querySelector('.roi-badge,.roi')?.innerText || 'N/A'; // added 2 options
-    
-    // Get all stat cards - works even if class is different
-    const statCards = document.querySelectorAll('.stat-card,.metric');
-    let startup = 'N/A', time = 'N/A', difficulty = 'N/A';
-    if(statCards.length >= 3){
-      startup = statCards[0].querySelector('div:first-child,.value')?.innerText || 'N/A';
-      time = statCards[1].querySelector('div:first-child,.value')?.innerText || 'N/A';
-      difficulty = statCards[2].querySelector('div:first-child,.value')?.innerText || 'N/A';
-  }
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF('p', 'mm', 'a4');
+
+      // HELPER TO GET TEXT SAFELY
+      const getText = (selector, fallback = 'N/A') => {
+        const el = document.querySelector(selector);
+        return el? el.innerText.trim() : fallback;
+      }
+
+      const businessName = getText('h1', 'Business Report');
+      const roi = getText('.roi,.roi-badge');
+      
+      // Try to get first 3 stat cards
+      const cards = document.querySelectorAll('.stat-card,.metric');
+      const startup = cards[0]? cards[0].innerText.replace(/\n/g, ' ') : 'N/A';
+      const time = cards[1]? cards[1].innerText.replace(/\n/g, ' ') : 'N/A';
+      const difficulty = cards[2]? cards[2].innerText.replace(/\n/g, ' ') : 'N/A';
+
+      // HEADER
+      doc.setFillColor(34, 197, 94);
+      doc.rect(0, 0, 210, 25, 'F');
+      doc.setTextColor(255,255,255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.text('MonyGIST BUSINESS REPORT', 15, 16);
+      
+      // CONTENT
+      doc.setTextColor(0,0,0);
+      doc.setFontSize(20);
+      doc.text(businessName, 15, 35);
+      
+      doc.setFontSize(11);
+      doc.setTextColor(80);
+      doc.text('By Ilemobayo Tolulope | @MonyGist', 15, 42);
+
+      doc.setFontSize(12);
+      doc.setTextColor(0);
+      doc.text(`ROI: ${roi}`, 15, 55);
+      doc.text(`Startup: ${startup}`, 15, 62);
+      doc.text(`Time to $10K: ${time}`, 15, 69);
+      doc.text(`Difficulty: ${difficulty}`, 15, 76);
+
+      // FOOTER
+      doc.setFontSize(9);
+      doc.setTextColor(150);
+      doc.text('© 2026 MonyGIST.com', 15, 287);
+
+      // DOWNLOAD
+      doc.save(businessName.replace(/[^a-z0-9]/gi, '-') + '-Report.pdf');
+
+    } catch(err) {
+      console.error("PDF ERROR:", err);
+      alert("PDF Failed: " + err.message + "\n\nCheck console with F12 for details");
+    } finally {
+      btn.innerText = "📄 Download PDF Report";
+      btn.style.opacity = "1";
+    }
+  });
+});
+</script>
 </body>
 </html>
