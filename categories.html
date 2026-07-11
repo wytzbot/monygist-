@@ -2,28 +2,118 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Categories | MonyGist US</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#22c55e;--bg:#f0fff4;--text:#111827;--card:#fff}
-*{box-sizing:border-box}body{font-family:'Inter';background:var(--bg);color:var(--text);margin:0}
-.navbar{background:#fff;padding:16px;border-bottom:1px solid #e5e7eb}
-.logo{font-family:'Anton';font-size:24px;color:#111;text-decoration:none}.logo span{color:var(--primary)}
-.container{max-width:700px;margin:0 auto;padding:20px}
-.header{background:var(--primary);color:#fff;text-align:center;padding:24px;font-family:'Anton';font-size:28px}
-.card{background:var(--card);border:2px solid #e5e7eb;border-radius:16px;padding:24px;margin:16px 0;text-align:center;cursor:pointer;transition:0.2s}
-.card:hover{border-color:var(--primary);transform:translateY(-2px)}
-.card h2{margin:0;font-size:22px}
-.card p{margin:8px 0 0;color:#6b7280}
-footer{background:#111827;color:#d1d5db;padding:30px 20px;text-align:center;margin-top:40px;font-size:14px}
+:root{
+  --primary:#16a34a;
+  --primary-dark:#15803d;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --text:#0f172a;
+  --text-light:#64748b;
+  --border:#e2e8f0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter';background:var(--bg);color:var(--text)}
+
+/* HEADER */
+.navbar{
+  background:#fff;
+  padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:10
+}
+.logo{font-family:'Anton';font-size:26px;color:#000;text-decoration:none;letter-spacing:-0.5px}
+.logo .green{color:var(--primary)}
+
+/* BANNER */
+.banner{
+  background:linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color:#fff;
+  text-align:center;
+  padding:28px 20px;
+  font-family:'Anton';
+  font-size:26px;
+  letter-spacing:0.5px;
+  box-shadow:0 4px 12px rgba(22,163,74,0.15)
+}
+
+/* CONTAINER */
+.container{max-width:680px;margin:0 auto;padding:24px 16px}
+
+/* CARDS */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:24px;
+  margin-bottom:14px;
+  text-align:center;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  box-shadow:0 1px 3px rgba(0,0,0,0.04)
+}
+.card:hover{
+  border-color:var(--primary);
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(22,163,74,0.12)
+}
+.card h2{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:6px;
+  color:var(--text)
+}
+.card p{
+  font-size:14px;
+  color:var(--text-light);
+  font-weight:500
+}
+
+/* FOOTER */
+footer{
+  background:#0f172a;
+  color:#94a3b8;
+  padding:32px 20px;
+  text-align:center;
+  margin-top:40px;
+  font-size:13px
+}
+footer b{color:#fff}
 </style></head><body>
-<header class="navbar"><div class="container" style="padding:0"><a href="index.html" class="logo">Mony<span>GIST</span></a></div></header>
-<div class="header">Choose a Category</div>
+
+<header class="navbar">
+  <a href="index.html" class="logo">Mony<span class="green">GIST</span></a>
+</header>
+
+<div class="banner">Choose a Category</div>
+
 <div class="container">
-<div class="card" onclick="location='businesses.html?cat=Food'"><h2>Food</h2><p>10 Business Ideas</p></div>
-<div class="card" onclick="location='businesses.html?cat=Service'"><h2>Service</h2><p>10 Business Ideas</p></div>
-<div class="card" onclick="location='businesses.html?cat=Online'"><h2>Online</h2><p>10 Business Ideas</p></div>
-<div class="card" onclick="location='businesses.html?cat=Finance'"><h2>Finance</h2><p>10 Business Ideas</p></div>
-<div class="card" onclick="location='businesses.html?cat=Health'"><h2>Health</h2><p>10 Business Ideas</p></div>
+  <div class="card" onclick="location='businesses.html?cat=Food'">
+    <h2>Food</h2>
+    <p>10 Business Ideas</p>
+  </div>
+  <div class="card" onclick="location='businesses.html?cat=Service'">
+    <h2>Service</h2>
+    <p>10 Business Ideas</p>
+  </div>
+  <div class="card" onclick="location='businesses.html?cat=Online'">
+    <h2>Online</h2>
+    <p>10 Business Ideas</p>
+  </div>
+  <div class="card" onclick="location='businesses.html?cat=Finance'">
+    <h2>Finance</h2>
+    <p>10 Business Ideas</p>
+  </div>
+  <div class="card" onclick="location='businesses.html?cat=Health'">
+    <h2>Health</h2>
+    <p>10 Business Ideas</p>
+  </div>
 </div>
-<footer>© 2026 MonyGist US | Data: US Census Bureau, SBA, Statista</footer>
+
+<footer>
+  <b>MonyGist US</b><br>
+  Data-Driven Business Intelligence | Sources: US Census, SBA, BLS 2026
+</footer>
+
 </body></html>
