@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools | MonyGist</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--primary:#22c55e;--bg:#fff;--text:#111827;--card:#fff;--border:#e5e7eb}
+body.dark{--bg:#0b1220;--text:#f3f4f6;--card:#111827;--border:#1f2937}
+*{box-sizing:border-box}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);margin:0}
+.container{max-width:900px;margin:0 auto;padding:20px}
+.navbar{padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:30px}
+.logo{font-family:'Anton';font-size:28px;letter-spacing:1px}.logo span{color:var(--primary)}
+.tabs{display:flex;gap:10px;overflow-x:auto;margin-bottom:30px}
+.tab{padding:12px 20px;border:2px solid var(--border);border-radius:10px;cursor:pointer;font-weight:700;white-space:nowrap}
+.tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tool{display:none}.tool.active{display:block}
+.input{padding:14px;border:2px solid var(--border);border-radius:10px;width:100%;margin:10px 0;background:var(--card);color:var(--text);font-size:16px}
+.btn{padding:14px 28px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;width:100%}
+.card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--border);margin:20px 0}
+.result{font-size:24px;font-weight:700;color:var(--primary);margin-top:15px}
+</style>
+</head><body>
+<header class="navbar"><div class="container">
+<a href="index.html" class="logo">Mony<span>GIST</span></a>
+<select id="country" style="float:right;padding:10px"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
+</div></header>
+
+<div class="container">
+<h1>AI Business Tools</h1>
+<p>Use data to make decisions, not guesses</p>
+
+<div class="tabs">
+<div class="tab active" onclick="showTab(0)">Profit Calc</div>
+<div class="tab" onclick="showTab(1)">Break-even</div>
+<div class="tab" onclick="showTab(2)">ROI</div>
+<div class="tab" onclick="showTab(3)">Pricing</div>
+<div class="tab" onclick="showTab(4)">Timeline</div>
+<div class="tab" onclick="showTab(5)">Ad Budget</div>
+<div class="tab" onclick="showTab(6)">Name Check</div>
+</div>
+
+<!-- TOOL 1: PROFIT -->
+<div id="tool0" class="tool active">
+<div class="card">
+<h2>Monthly Profit Calculator</h2>
+<input id="rev" type="number" placeholder="Monthly Revenue" class="input">
+<input id="cost" type="number" placeholder="Monthly Costs" class="input">
+<button class="btn" onclick="calcProfit()">Calculate Profit</button>
+<div id="res1" class="result"></div>
+</div>
+</div>
+
+<!-- TOOL 2: BREAK-EVEN -->
+<div id="tool1" class="tool">
+<div class="card">
+<h2>Break-even Calculator</h2>
+<input id="startup" type="number" placeholder="Startup Cost" class="input">
+<input id="mprofit" type="number" placeholder="Monthly Profit" class="input">
+<button class="btn" onclick="calcBE()">When Do I Break Even?</button>
+<div id="res2" class="result"></div>
+</div>
+</div>
+
+<!-- TOOL 3: ROI -->
+<div id="tool2" class="tool">
+<div class="card">
+<h2>ROI Calculator</h2>
+<input id="gain" type="number" placeholder="Total Gain" class="input">
+<input id="invest" type="number" placeholder="Investment" class="input">
+<button class="btn" onclick="calcROI()">Calculate ROI</button>
+<div id="res3" class="result"></div>
+</div>
+</div>
+
+<!-- TOOL 4: PRICING -->
+<div id="tool3" class="tool">
+<div class="card">
+<h2>Pricing Calculator</h2>
+<input id="pcost" type="number" placeholder="Cost per product/service" class="input">
+<input id="margin" type="number" placeholder="Desired Margin %" class="input">
+<button class="btn" onclick="calcPrice()">Suggest Price</button>
+<div id="res4" class="result"></div>
+</div>
+</div>
+
+<!-- TOOL 5: TIMELINE GRAPH -->
+<div id="tool4" class="tool">
+<div class="card">
+<h2>Profit Timeline</h2>
+<input id="tstartup" type="number" placeholder="Startup Cost" class="input">
+<input id="tprofit" type="number" placeholder="Expected Monthly Profit" class="input">
+<button class="btn" onclick="drawChart()">Show Timeline</button>
+<canvas id="chart" style="margin-top:20px"></canvas>
+</div>
+</div>
+
+<!-- TOOL 6: AD BUDGET -->
+<div id="tool5" class="tool">
+<div class="card">
+<h2>Ad Budget Calculator</h2>
+<input id="customers" type="number" placeholder="How many customers do you want?" class="input">
+<button class="btn" onclick="calcAds()">Get Ad Plan</button>
+<div id="res6"></div>
+</div>
+</div>
+
+<!-- TOOL 7: NAME CHECKER -->
+<div id="tool6" class="tool">
+<div class="card">
+<h2>Business Name Checker</h2>
+<input id="bizname" type="text" placeholder="Enter business name" class="input">
+<button class="btn" onclick="checkName()">Check Domain + Social</button>
+<div id="res7"></div>
+</div>
+</div>
+
+</div>
+
+<script>
+let country = localStorage.getItem('country') || 'US';
+document.getElementById('country').value = country;
+document.getElementById('country').onchange = e => {localStorage.setItem('country', e.target.value); location.reload();}
+function format(n){const s={US:'$',UK:'£',CA:'C$',NG:'₦'}; return s[country]+Number(n).toLocaleString();}
+
+function showTab(n){
+ document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i==n));
+ document.querySelectorAll('.tool').forEach((d,i)=>d.classList.toggle('active',i==n));
+}
+
+// 1. PROFIT
+function calcProfit(){res1.innerText = 'Monthly Profit: ' + format(+rev.value - +cost.value)}
+
+// 2. BREAK-EVEN
+function calcBE(){
+ let months = (+startup.value / +mprofit.value).toFixed(1);
+ res2.innerText = `Break-even in ${months} months`;
+}
+
+// 3. ROI
+function calcROI(){
+ let roi = ((+gain.value - +invest.value) / +invest.value * 100).toFixed(1);
+ res3.innerText = `ROI: ${roi}%`;
+}
+
+// 4. PRICING
+function calcPrice(){
+ let price = +pcost.value / (1 - (+margin.value/100));
+ res4.innerText = `Charge: ${format(price)} | Profit per sale: ${format(price - +pcost.value)}`;
+}
+
+// 5. TIMELINE CHART
+let chart;
+function drawChart(){
+ let cost = +tstartup.value; let profit = +tprofit.value;
+ let data = [ -cost ];
+ for(let i=1; i<=12; i++){ data.push(data[i-1] + profit) }
+ if(chart) chart.destroy();
+ chart = new Chart(document.getElementById('chart'), {
+  type: 'line',
+  data: {labels:['Start',...Array(12).fill().map((_,i)=>'M'+(i+1))], datasets:[{label:'Cumulative Profit', data:data, borderColor:'#22c55e', fill:true}]},
+  options:{responsive:true}
+ });
+}
+
+// 6. AD BUDGET - Country based
+function calcAds(){
+ let c = +customers.value;
+ let plans = {US:`FB: ${format(c*2)} | TikTok: ${format(c*1.5)}`, UK:`FB: ${format(c*1.8)} | Google: ${format(c*2.5)}`, CA:`FB: ${format(c*2.2)} | TikTok: ${format(c*1.6)}`, NG:`WhatsApp: ${format(c*100)} | FB: ${format(c*200)}`};
+ res6.innerHTML = `<p><b>To get ${c} customers in ${country}:</b></p><p>${plans[country]}</p>`;
+}
+
+// 7. NAME CHECKER
+function checkName(){
+ let name = bizname.value.toLowerCase().replace(/ /g,'');
+ res7.innerHTML = `
+ <p>✅ ${name}.com - Likely Available</p>
+ <p>✅ @${name} - Check Instagram</p>
+ <p>✅ @${name} - Check TikTok</p>
+ <p style="font-size:14px;color:gray">Tip: Secure them fast before someone else does</p>
+ `;
+}
+</script>
+</body></html>
