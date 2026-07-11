@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Businesses | MonyGist US</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#22c55e;--bg:#fff;--text:#111827;--card:#fff}
+*{box-sizing:border-box}body{font-family:'Inter';background:var(--bg);color:var(--text);margin:0}
+.navbar{background:#fff;padding:16px;border-bottom:1px solid #e5e7eb}
+.logo{font-family:'Anton';font-size:24px;color:#111;text-decoration:none}.logo span{color:var(--primary)}
+.container{max-width:700px;margin:0 auto;padding:20px}
+h1{font-family:'Anton';font-size:28px}
+.card{background:var(--card);border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:12px 0;cursor:pointer}
+.card:hover{border-color:var(--primary)}
+.card h3{margin:0 0 8px;font-size:18px}
+.profit{color:var(--primary);font-weight:700}
+footer{background:#111827;color:#d1d5db;padding:30px 20px;text-align:center;margin-top:40px;font-size:14px}
+</style></head><body>
+<header class="navbar"><div class="container" style="padding:0"><a href="index.html" class="logo">Mony<span>GIST</span></a></div></header>
+<div class="container">
+<h1 id="title">Businesses</h1>
+<div id="list"></div>
+</div>
+<script src="data.js?v=16"></script>
+<script>
+const urlParams = new URLSearchParams(location.search);
+const cat = urlParams.get('cat');
+document.getElementById('title').innerText = `Businesses in ${cat}`;
+
+const filtered = BUSINESS_DATA.filter(b => b.cat === cat);
+let html = '';
+filtered.forEach(b => {
+  html += `
+  <div class="card" onclick="location='article.html?id=${b.id}'">
+    <h3>${b.name}</h3>
+    <div class="profit">$${b.profit.US.toLocaleString()}/month</div>
+  </div>
+  `;
+});
+document.getElementById('list').innerHTML = html;
+</script>
+<footer>© 2026 MonyGist US</footer>
+</body></html>
