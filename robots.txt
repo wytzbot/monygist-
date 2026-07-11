@@ -1,1 +1,16 @@
+User-agent: *
+Allow: /
 
+# Allow AI crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://yourusername.github.io/sitemap.xml
