@@ -7,19 +7,18 @@
   <meta name="theme-color" content="#22c55e">
   <link rel="manifest" href="/manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/data.js"></script> <!-- THIS LOADS YOUR 200 IDEAS -->
   <style>
     body { font-family: 'Inter', sans-serif; }
-   .stat-card { background: #f9fafb; border-radius: 0.75rem; padding: 1rem; text-align: center; border: 1px solid #e5e7eb; }
-   .stat-label { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-   .stat-value { font-size: 1.25rem; font-weight: 700; color: #111827; margin-top: 0.25rem; display: block; }
-   .section { margin-bottom: 2.5rem; }
-   .section h2 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
-   .section h3 { font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-top: 1rem; margin-bottom: 0.5rem; }
+  .stat-card { background: #f9fafb; border-radius: 0.75rem; padding: 1rem; text-align: center; border: 1px solid #e5e7eb; }
+  .stat-label { font-size: 0.75rem; color: #6b7280; font-weight: 600; text-transform: uppercase; }
+  .stat-value { font-size: 1.25rem; font-weight: 700; color: #111827; margin-top: 0.25rem; display: block; }
+  .section { margin-bottom: 2.5rem; }
+  .section h2 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
   </style>
 </head>
 <body class="bg-white text-gray-700">
 
-  <!-- HEADER -->
   <header class="sticky top-0 bg-white border-b z-10">
     <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
       <a href="/" class="text-2xl font-bold text-green-600">MonyGIST</a>
@@ -27,16 +26,13 @@
     </div>
   </header>
 
-  <!-- MAIN ARTICLE -->
   <main class="max-w-5xl mx-auto px-4 py-10">
-    
     <div class="mb-8">
       <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">USA 2026 REPORT</span>
       <h1 id="businessName" class="text-4xl font-extrabold mt-3 mb-2">Loading...</h1>
       <p id="businessSubtitle" class="text-lg text-gray-600">Loading data...</p>
     </div>
 
-    <!-- STATS GRID -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
       <div class="stat-card"><div class="stat-label">Startup Cost</div><div id="startup" class="stat-value">N/A</div></div>
       <div class="stat-card"><div class="stat-label">Avg Monthly Profit</div><div id="profit" class="stat-value">N/A</div></div>
@@ -44,7 +40,6 @@
       <div class="stat-card"><div class="stat-label">Risk Level</div><div id="risk" class="stat-value">N/A</div></div>
     </div>
 
-    <!-- 9 SECTIONS -->
     <section class="section"><h2>1. Startup Cost</h2><div id="section1"></div></section>
     <section class="section"><h2>2. Profit Potential</h2><div id="section2"></div></section>
     <section class="section"><h2>3. Limitations</h2><div id="section3"></div></section>
@@ -55,69 +50,28 @@
     <section class="section"><h2>8. Plans for Small Scale</h2><div id="section8"></div></section>
     <section class="section"><h2>9. Best Marketing Strategies</h2><div id="section9"></div></section>
 
-    <!-- SOURCES -->
     <section class="section bg-gray-50 p-6 rounded-xl">
       <h3 class="text-lg font-bold mb-3">Sources Cited</h3>
       <ol id="sources" class="list-decimal pl-6 text-sm text-gray-600 space-y-1"></ol>
     </section>
 
-    <!-- 1 AI TOOLS BUTTON -->
     <section class="section mt-12 text-center border-t pt-8">
-      <h2 class="text-2xl font-bold mb-3">Need Help Executing This?</h2>
-      <p class="mb-4">Use our AI to generate business plans, ad copy, and research for this idea.</p>
       <a href="/tools.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition inline-block">Open AI Tools</a>
     </section>
-
   </main>
 
-  <!-- LOAD JSPDF FIRST -->
   <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
-  <!-- DATABASE + LOGIC -->
   <script>
-    const businessData = {
-      "ecommerce": {
-        name: "E-commerce Store",
-        subtitle: "Sell physical products online with Shopify and TikTok ads",
-        startup: "$2,000 - $10,000",
-        profit: "$5,000 - $30,000",
-        time: "3-6 Months",
-        risk: "Medium",
-        s1: `<p>Starting in the USA in 2026 requires $2.5K-$10K. <b>LLC + Shopify:</b> $200-$500. <b>Inventory:</b> $1,000-$5,000. <b>Ads:</b> $1,000 to test. With 2026 tariffs, use US suppliers.</p>`,
-        s2: `<p>Average margin is 10-20%. <b>Example:</b> $50K/mo revenue x 20% = $10K/mo profit. IBISWorld 2026 reports top 10% Shopify stores do $1M+/year.</p>`,
-        s3: `<p>1. <b>Ad Costs:</b> Facebook CPM up 22% in 2026. 2. <b>Competition:</b> Amazon and Temu dominate price. 3. <b>Returns:</b> 16.5% avg return rate for apparel.</p>`,
-        s4: `<p><b>Target Customers:</b> CA, TX, FL, NY. They are 40% of US online spending. <b>Warehouse:</b> TX, NV, FL for no income tax + 2-day shipping.</p>`,
-        s5: `<p><b>Amazon:</b> Price + Speed. Weakness: Generic brands. <b>Shopify Brands:</b> Story + Community. Weakness: High ad spend. <b>Temu:</b> Ultra low price.</p>`,
-        s6: `<ol class="list-decimal pl-6"><li><b>Niche Down:</b> Don't sell "shoes". Sell "barefoot shoes for runners".</li><li><b>Brand > Product:</b> People pay 30% more for trusted brands.</li></ol>`,
-        s7: `<p>1. <b>Bad Product:</b> 70% fail from no demand. Validate on TikTok first. 2. <b>Ad Burn:</b> $5K spent with no ROAS. Start $50/day.</p>`,
-        s8: `<p><b>Phase 1: $0-$3K/mo:</b> 1 product, $50/day ads. <b>Phase 2: $3K-$20K/mo:</b> Hire VA + 3PL. <b>Phase 3: $20K+/mo:</b> Build email list to 10K.</p>`,
-        s9: `<p>1. <b>TikTok Organic:</b> #1 driver in 2026. 2. <b>Meta Ads:</b> Advantage+ Shopping. 3. <b>Email/SMS:</b> Klaviyo makes 30% of revenue.</p>`,
-        sources: ["SBA.gov 2026 Startup Report", "IBISWorld - Online Retail 45411, Jan 2026", "Shopify State of Commerce 2026"]
-      },
-      "credit-repair": {
-        name: "Credit Repair Business",
-        subtitle: "Help Americans fix credit and get approved for loans",
-        startup: "$1,500 - $5,000",
-        profit: "$8,000 - $25,000",
-        time: "60-90 Days",
-        risk: "Medium",
-        s1: `<p>Start for under $5K. <b>LLC:</b> $50-$500. <b>Software:</b> Credit Repair Cloud $99/mo. <b>Bond/Insurance:</b> $300-$800/yr required in CA, TX, FL.</p>`,
-        s2: `<p>Pricing: $99-$199 setup + $99-$149/mo. Avg client LTV = $1,044. To hit $10K/mo you need 68 clients. Gross margin 85%.</p>`,
-        s3: `<p>1. <b>CROA Law:</b> Illegal to charge before services. 2. <b>State License:</b> MD, SC, FL require license. $10K penalty.</p>`,
-        s4: `<p><b>Best States:</b> MS, AL, LA, GA, TX. Lowest credit scores. <b>Best Cities:</b> Houston, Atlanta, Dallas.</p>`,
-        s5: `<p><b>Lexington Law:</b> $400 setup + $129/mo. Weakness: 30 day wait. <b>Sky Blue:</b> $79/mo. Weakness: No app.</p>`,
-        s6: `<ol class="list-decimal pl-6"><li><b>Speed:</b> First letters in 7 days vs 30 days.</li><li><b>Tech:</b> Give mobile portal to track disputes.</li></ol>`,
-        s7: `<p>1. <b>Ad Burn:</b> $3K on bad funnel = $0. Use quiz funnel. 2. <b>FTC Lawsuit:</b> Violating CROA = $10K fine.</p>`,
-        s8: `<p><b>Month 1-2:</b> 10 clients from Facebook + TikTok. $1,500/mo. <b>Month 3-4:</b> Hire VA $500/mo. $50/day ads.</p>`,
-        s9: `<p>1. <b>TikTok/Shorts:</b> "3 things killing your credit". 2. <b>Google SEO:</b> "credit repair near me Atlanta".</p>`,
-        sources: ["FTC.gov CROA 2024 Report", "Experian State of Credit 2025", "IBISWorld Credit Counseling 56144"]
-      }
-    };
-
     document.addEventListener('DOMContentLoaded', function() {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get('id') || 'ecommerce';
-      const data = businessData[id] || businessData['ecommerce']; // fallback
+      const id = params.get('id');
+      const data = businessData[id]; // PULLS FROM data.js
+
+      if(!data){
+        document.getElementById('businessName').innerText = "Business Not Found";
+        document.getElementById('businessSubtitle').innerText = "Check if?id=" + id + " exists in data.js";
+        return;
+      }
 
       // FILL DATA
       document.getElementById('businessName').innerText = data.name;
@@ -126,15 +80,14 @@
       document.getElementById('profit').innerText = data.profit;
       document.getElementById('time').innerText = data.time;
       document.getElementById('risk').innerText = data.risk;
-      for(let i=1; i<=9; i++) document.getElementById(`section${i}`).innerHTML = data[`s${i}`];
-      
+      for(let i=1; i<=9; i++) document.getElementById(`section${i}`).innerHTML = data[`s${i}`] || '<p>No data</p>';
+
       const sourcesList = document.getElementById('sources');
       sourcesList.innerHTML = '';
       data.sources.forEach(src => { sourcesList.innerHTML += `<li>${src}</li>`; });
 
-      // PDF SCRIPT
-      const btn = document.getElementById('downloadPDF');
-      btn.addEventListener('click', function(e) {
+      // PDF
+      document.getElementById('downloadPDF').addEventListener('click', function(e) {
         e.preventDefault();
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -150,4 +103,4 @@
     });
   </script>
 </body>
-  </html>
+</html>
