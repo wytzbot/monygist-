@@ -89,7 +89,7 @@ const BUSINESS_DATA = [
 {"id":"waffles","name":"Belgian Waffle Cafe","cat":"Food","startup":{"US":80000},"profit":{"US":6800},"comp":"Breakfast chains","beat":"Sweet + Savory + Instagram","limit":"Morning rush","mistake":"No dinner","locations":"Tourist areas"},
 {"id":"ribs","name":"Rib Restaurant","cat":"Food","startup":{"US":190000},"profit":{"US":14500},"comp":"BBQ chains","beat":"Family style + Catering","limit":"Meat costs","mistake":"Inconsistent","locations":"Suburbs"},
 
-  ,{"id":"housecleaning","name":"House Cleaning Service","cat":"Service","startup":{"US":8000},"profit":{"US":6000},"comp":"MaidPro, Local cleaners","beat":"Eco products + Subscription + Background checks","limit":"Labor + Insurance","mistake":"No contracts","locations":"Affluent suburbs"},
+  {"id":"housecleaning","name":"House Cleaning Service","cat":"Service","startup":{"US":8000},"profit":{"US":6000},"comp":"MaidPro, Local cleaners","beat":"Eco products + Subscription + Background checks","limit":"Labor + Insurance","mistake":"No contracts","locations":"Affluent suburbs"},
 {"id":"lawncare","name":"Lawn Care Service","cat":"Service","startup":{"US":15000},"profit":{"US":8000},"comp":"TruGreen, Local landscapers","beat":"Apps + Packages + Snow removal upsell","limit":"Seasonal + Equipment","mistake":"Underpricing","locations":"Suburbs with large yards"},
 {"id":"mobilecarwash","name":"Mobile Car Wash","cat":"Service","startup":{"US":12000},"profit":{"US":5500},"comp":"Detail shops, Car washes","beat":"Convenience + Subscription + Fleet contracts","limit":"Water + Weather","mistake":"No recurring customers","locations":"Office parks, Apartments"},
 {"id":"pestcontrol","name":"Pest Control Service","cat":"Service","startup":{"US":25000},"profit":{"US":9000},"comp":"Orkin, Terminix","beat":"Eco friendly + Monthly plans","limit":"Licenses + Chemicals","mistake":"No service agreements","locations":"Nationwide"},
@@ -123,7 +123,7 @@ const BUSINESS_DATA = [
 {"id":"printshop","name":"Print Shop","cat":"Service","startup":{"US":40000},"profit":{"US":7000},"comp":"FedEx, VistaPrint","beat":"Fast + Custom + Local","limit":"Equipment + Rent","mistake":"No online orders","locations":"College towns"},
 {"id":"tailoring","name":"Tailoring Service","cat":"Service","startup":{"US":8000},"profit":{"US":4500},"comp":"Dry cleaners","beat":"Weddings + Fast + Quality","limit":"Skill + Rent","mistake":"No marketing","locations":"Affluent areas"},
 
-  ,{"id":"dropshipping","name":"Dropshipping Store","cat":"Online","startup":{"US":2000},"profit":{"US":5000},"comp":"Amazon, Shopify stores","beat":"Niche + TikTok ads + Fast shipping","limit":"Suppliers + Returns","mistake":"Selling generic products","locations":"Nationwide"},
+  {"id":"dropshipping","name":"Dropshipping Store","cat":"Online","startup":{"US":2000},"profit":{"US":5000},"comp":"Amazon, Shopify stores","beat":"Niche + TikTok ads + Fast shipping","limit":"Suppliers + Returns","mistake":"Selling generic products","locations":"Nationwide"},
 {"id":"saas","name":"SaaS Software","cat":"Online","startup":{"US":30000},"profit":{"US":25000},"comp":"Other SaaS","beat":"Niche + Free trial + Support","limit":"Development + Churn","mistake":"No customer feedback","locations":"Remote"},
 {"id":"printondemand","name":"Print on Demand","cat":"Online","startup":{"US":1000},"profit":{"US":4000},"comp":"Etsy, Amazon","beat":"Unique designs + Ads + Bundles","limit":"Ad costs + Margins","mistake":"No branding","locations":"Nationwide"},
 {"id":"onlinecourse","name":"Online Course Business","cat":"Online","startup":{"US":5000},"profit":{"US":12000},"comp":"Udemy, Teachable","beat":"Niche + Community + Results","limit":"Marketing + Updates","mistake":"No email list","locations":"Remote"},
@@ -154,7 +154,7 @@ const BUSINESS_DATA = [
 {"id":"chatbot","name":"Chatbot Development","cat":"Online","startup":{"US":1000},"profit":{"US":8500},"comp":"Other developers","beat":"ROI + Support + Niche","limit":"Tech + Clients","mistake":"No training","locations":"Remote"},
 {"id":"adsagency","name":"Google Ads Agency","cat":"Online","startup":{"US":1000},"profit":{"US":11000},"comp":"Other agencies","beat":"Results + Niches + Reporting","limit":"Client churn","mistake":"No tracking","locations":"Remote"},
 
-  ,{"id":"creditrepair","name":"Credit Repair Service","cat":"Finance","startup":{"US":3000},"profit":{"US":5000},"comp":"Lexington Law, Local firms","beat":"Results + Disputes + Education","limit":"Compliance + Results","mistake":"No contracts","locations":"Nationwide"},
+  {"id":"creditrepair","name":"Credit Repair Service","cat":"Finance","startup":{"US":3000},"profit":{"US":5000},"comp":"Lexington Law, Local firms","beat":"Results + Disputes + Education","limit":"Compliance + Results","mistake":"No contracts","locations":"Nationwide"},
 {"id":"taxprep","name":"Tax Preparation Service","cat":"Finance","startup":{"US":5000},"profit":{"US":8000},"comp":"H&R Block, TurboTax","beat":"Year-round + Business + Audit help","limit":"Seasonal + Licensing","mistake":"No marketing in off-season","locations":"Nationwide"},
 {"id":"financialadvisor","name":"Financial Advisor","cat":"Finance","startup":{"US":10000},"profit":{"US":12000},"comp":"Edward Jones, Merrill","beat":"Niche + Fee-based + Planning","limit":"Licensing + Trust","mistake":"No niche","locations":"Affluent areas"},
 {"id":"bookkeeping","name":"Bookkeeping Service","cat":"Finance","startup":{"US":2000},"profit":{"US":6000},"comp":"Quickbooks, Local accountants","beat":"Software + Monthly + Industry niche","limit":"Finding clients","mistake":"No software","locations":"Remote"},
@@ -185,7 +185,7 @@ const BUSINESS_DATA = [
 {"id":"treasury","name":"Treasury Management","cat":"Finance","startup":{"US":8000},"profit":{"US":10000},"comp":"Banks","beat":"Cash flow + Forecasting","limit":"Expertise + Clients","mistake":"No software","locations":"Corporate"},
 {"id":"fintech","name":"Fintech App","cat":"Finance","startup":{"US":80000},"profit":{"US":22000},"comp":"Chime, SoFi","beat":"Niche + UX + Low fees","limit":"Development + Compliance","mistake":"No MVP","locations":"Tech hubs"},
 
-  ,{"id":"personaltraining","name":"Personal Training","cat":"Health","startup":{"US":5000},"profit":{"US":7000},"comp":"Gyms, Other trainers","beat":"Niche + Results + Online","limit":"Time + Clients","mistake":"No niche","locations":"Gyms, Online"},
+  {"id":"personaltraining","name":"Personal Training","cat":"Health","startup":{"US":5000},"profit":{"US":7000},"comp":"Gyms, Other trainers","beat":"Niche + Results + Online","limit":"Time + Clients","mistake":"No niche","locations":"Gyms, Online"},
 {"id":"yogastudio","name":"Yoga Studio","cat":"Health","startup":{"US":40000},"profit":{"US":9000},"comp":"Other studios, Gyms","beat":"Community + Classes + Retail","limit":"Rent + Teachers","mistake":"No memberships","locations":"Urban areas"},
 {"id":"pilates","name":"Pilates Studio","cat":"Health","startup":{"US":60000},"profit":{"US":10000},"comp":"Other studios","beat":"Reformers + Small classes","limit":"Equipment + Rent","mistake":"No packages","locations":"Affluent areas"},
 {"id":"massage","name":"Massage Therapy","cat":"Health","startup":{"US":15000},"profit":{"US":6500},"comp":"Massage Envy, Local therapists","beat":"Mobile + Membership + Specialties","limit":"Licensing + Rent","mistake":"No recurring","locations":"Suburbs"},
@@ -215,5 +215,4 @@ const BUSINESS_DATA = [
 {"id":"optometry","name":"Optometry Practice","cat":"Health","startup":{"US":80000},"profit":{"US":13000},"comp":"LensCrafters, Other ODs","beat":"Tech + Frames + Service","limit":"Equipment + Inventory","mistake":"No insurance","locations":"Malls, Suburbs"},
 {"id":"counseling","name":"Marriage Counseling","cat":"Health","startup":{"US":2000},"profit":{"US":6000},"comp":"Other counselors","beat":"Niche + Online + Results","limit":"Finding clients","mistake":"No niche","locations":"Remote"},
 {"id":"healthcoach","name":"Health Coaching","cat":"Health","startup":{"US":1000},"profit":{"US":5500},"comp":"Apps, Other coaches","beat":"Results + Accountability + Niche","limit":"Client acquisition","mistake":"No system","locations":"Remote"}
-];
 ];
