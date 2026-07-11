@@ -107,100 +107,92 @@ if(business){
   </div>
 </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- 1. LOAD JSPDF FIRST -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- 2. YOUR BUTTON -->
+<a href="#" id="downloadPDF" style="display:block;background:#fff;color:#22c55e;border:2px solid #22c55e;text-align:center;padding:14px;border-radius:12px;font-weight:700;margin-top:12px;text-decoration:none">
+  📄 Download PDF Report
+</a>
+
+<!-- 3. THE SCRIPT -->
 <script>
-const { jsPDF } = window.jspdf;
-
-document.getElementById('downloadPDF').addEventListener('click', function() {
-  const doc = new jsPDF('p', 'mm', 'a4');
-  const pageWidth = 210;
-  let y = 20;
-
-  // 1. HEADER
-  doc.setFillColor(34, 197, 94); // MonyGIST Green
-  doc.rect(0, 0, pageWidth, 25, 'F');
-  doc.setTextColor(255,255,255);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(18);
-  doc.text('MonyGIST BUSINESS REPORT', 15, 16);
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('downloadPDF');
   
-  // 2. BUSINESS NAME
-  y = 35;
-  doc.setTextColor(0,0,0);
-  doc.setFontSize(20);
-  doc.setFont('helvetica', 'bold');
-  const businessName = document.querySelector('h1').innerText;
-  doc.text(businessName, 15, y);
-  
-  y += 8;
-  doc.setFontSize(11);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(100);
-  doc.text('Data-driven report by Ilemobayo Tolulope | @MonyGist', 15, y);
+  if (!btn) return;
 
-  // 3. KEY METRICS BOX
-  y += 12;
-  doc.setFillColor(249, 250, 251);
-  doc.roundedRect(15, y, 180, 35, 3, 3, 'F');
-  
-  const roi = document.querySelector('.roi').innerText;
-  const stats = [...document.querySelectorAll('.stat-card')].map(s => ({
-    val: s.querySelector('div:first-child').innerText,
-    label: s.querySelector('div:last-child').innerText
-  }));
+  btn.addEventListener('click', function(e) {
+    e.preventDefault(); // stops the # link from jumping
+    
+    // Check if jsPDF loaded
+    if (typeof window.jspdf === 'undefined') {
+      alert('PDF library not loaded. Please refresh the page.');
+      return;
+    }
 
-  doc.setFontSize(10);
-  doc.setTextColor(0);
-  doc.setFont('helvetica', 'bold');
-  doc.text('ROI', 20, y+8);
-  doc.text('STARTUP COST', 65, y+8);
-  doc.text('TIME TO $10K', 120, y+8);
-  doc.text('DIFFICULTY', 165, y+8);
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = 210;
+    let y = 20;
 
-  doc.setFontSize(14);
-  doc.text(roi, 20, y+16);
-  doc.text(stats[0]?.val || 'N/A', 65, y+16);
-  doc.text(stats[1]?.val || 'N/A', 120, y+16);
-  doc.text(stats[2]?.val || 'N/A', 165, y+16);
-  
-  // 4. SECTION: WHY THIS WORKS
-  y += 45;
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.text('WHY THIS WORKS IN 2026', 15, y);
-  y += 6;
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  const whyText = document.querySelector('.card p').innerText;
-  const splitWhy = doc.splitTextToSize(whyText, 180);
-  doc.text(splitWhy, 15, y);
-  y += splitWhy.length * 5 + 5;
-
-  // 5. SECTION: 5-STEP LAUNCH PLAN
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.text('5-STEP LAUNCH PLAN', 15, y);
-  y += 7;
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  const steps = document.querySelectorAll('ol li');
-  steps.forEach((li, i) => {
+    // HEADER
+    doc.setFillColor(34, 197, 94);
+    doc.rect(0, 0, pageWidth, 25, 'F');
+    doc.setTextColor(255,255,255);
     doc.setFont('helvetica', 'bold');
-    doc.text(`${i+1}.`, 15, y);
+    doc.setFontSize(18);
+    doc.text('MonyGIST BUSINESS REPORT', 15, 16);
+    
+    // BUSINESS NAME
+    y = 35;
+    doc.setTextColor(0,0,0);
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    const businessName = document.querySelector('h1')? document.querySelector('h1').innerText : 'Business Report';
+    doc.text(businessName, 15, y);
+    
+    y += 8;
+    doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
-    const stepText = doc.splitTextToSize(li.innerText, 170);
-    doc.text(stepText, 22, y);
-    y += stepText.length * 5 + 2;
+    doc.setTextColor(100);
+    doc.text('Data-driven report by Ilemobayo Tolulope | @MonyGist', 15, y);
+
+    // KEY METRICS
+    y += 12;
+    doc.setFillColor(249, 250, 251);
+    doc.roundedRect(15, y, 180, 35, 3, 3, 'F');
+    
+    const roiEl = document.querySelector('.roi');
+    const roi = roiEl? roiEl.innerText : 'N/A';
+    const stats = [...document.querySelectorAll('.stat-card')].map(s => ({
+      val: s.querySelector('div:first-child').innerText,
+      label: s.querySelector('div:last-child').innerText
+    }));
+
+    doc.setFontSize(10);
+    doc.setTextColor(0);
+    doc.setFont('helvetica', 'bold');
+    doc.text('ROI', 20, y+8);
+    doc.text('STARTUP COST', 65, y+8);
+    doc.text('TIME TO $10K', 120, y+8);
+    doc.text('DIFFICULTY', 165, y+8);
+
+    doc.setFontSize(14);
+    doc.text(roi, 20, y+16);
+    doc.text(stats[0]?.val || 'N/A', 65, y+16);
+    doc.text(stats[1]?.val || 'N/A', 120, y+16);
+    doc.text(stats[2]?.val || 'N/A', 165, y+16);
+    
+    // FOOTER
+    doc.setFontSize(9);
+    doc.setTextColor(150);
+    doc.text('© 2026 MonyGIST by Ilemobayo Tolulope', 15, 287);
+
+    // DOWNLOAD
+    const fileName = businessName.replace(/[^a-z0-9]/gi, '-') + '-Report.pdf';
+    doc.save(fileName);
   });
-
-  // 6. FOOTER
-  doc.setFontSize(9);
-  doc.setTextColor(150);
-  doc.text('Disclaimer: Estimates based on 2026 US averages. Results vary. See full disclaimer at monygist.com', 15, 287);
-  doc.text('© 2026 MonyGIST by Ilemobayo Tolulope', 15, 292);
-
-  // DOWNLOAD
-  const fileName = businessName.replace(/[^a-z0-9]/gi, '-') + '-Report.pdf';
-  doc.save(fileName);
 });
 </script>
 </body></html>
