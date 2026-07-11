@@ -1,183 +1,194 @@
 <!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Tools | MonyGist</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI Business Tools | MonyGist</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#22c55e;--bg:#fff;--text:#111827;--card:#fff;--border:#e5e7eb}
+:root{--primary:#22c55e;--bg:#fff;--text:#111827;--card:#f9fafb;--border:#e5e7eb}
 body.dark{--bg:#0b1220;--text:#f3f4f6;--card:#111827;--border:#1f2937}
 *{box-sizing:border-box}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);margin:0}
-.container{max-width:900px;margin:0 auto;padding:20px}
-.navbar{padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:30px}
-.logo{font-family:'Anton';font-size:28px;letter-spacing:1px}.logo span{color:var(--primary)}
-.tabs{display:flex;gap:10px;overflow-x:auto;margin-bottom:30px}
-.tab{padding:12px 20px;border:2px solid var(--border);border-radius:10px;cursor:pointer;font-weight:700;white-space:nowrap}
+.container{max-width:900px;margin:0 auto;padding:16px}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
+.logo{font-family:'Anton';font-size:24px;text-decoration:none;color:var(--text)}.logo span{color:var(--primary)}
+h1{font-family:'Anton';font-size:28px;margin:20px 0 8px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 0}
+.tab{padding:10px 18px;border:2px solid var(--border);background:var(--card);border-radius:10px;cursor:pointer;font-weight:600;white-space:nowrap}
 .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.tool{display:none}.tool.active{display:block}
-.input{padding:14px;border:2px solid var(--border);border-radius:10px;width:100%;margin:10px 0;background:var(--card);color:var(--text);font-size:16px}
-.btn{padding:14px 28px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;width:100%}
-.card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--border);margin:20px 0}
-.result{font-size:24px;font-weight:700;color:var(--primary);margin-top:15px}
+.tool-card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--border);margin:20px 0}
+.input{width:100%;padding:14px;margin:10px 0;border:2px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);font-size:16px}
+.btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:16px;cursor:pointer}
+.result{background:#f0fdf4;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin-top:16px;display:none}
+.result h3{margin:0 0 8px;color:var(--primary)}
+.ai-tip{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px;border-radius:8px;margin-top:12px;font-size:14px}
+footer{background:#111827;color:#d1d5db;padding:40px 16px;margin-top:60px;font-size:14px}
 </style>
 </head><body>
-<header class="navbar"><div class="container">
+<header class="navbar container">
 <a href="index.html" class="logo">Mony<span>GIST</span></a>
-<select id="country" style="float:right;padding:10px"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
-</div></header>
+<select id="country"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
+</header>
 
-<div class="container">
+<main class="container">
 <h1>AI Business Tools</h1>
 <p>Use data to make decisions, not guesses</p>
 
 <div class="tabs">
-<div class="tab active" onclick="showTab(0)">Profit Calc</div>
-<div class="tab" onclick="showTab(1)">Break-even</div>
-<div class="tab" onclick="showTab(2)">ROI</div>
-<div class="tab" onclick="showTab(3)">Pricing</div>
-<div class="tab" onclick="showTab(4)">Timeline</div>
-<div class="tab" onclick="showTab(5)">Ad Budget</div>
-<div class="tab" onclick="showTab(6)">Name Check</div>
+  <div class="tab active" onclick="showTool('roi')">ROI Analyzer</div>
+  <div class="tab" onclick="showTool('pricing')">Pricing Strategy</div>
+  <div class="tab" onclick="showTool('breakeven')">Break-even Pro</div>
+  <div class="tab" onclick="showTool('timeline')">Launch Timeline</div>
+  <div class="tab" onclick="showTool('risk')">Risk Score</div>
+  <div class="tab" onclick="showTool('profit')">Profit Forecast</div>
+  <div class="tab" onclick="showTool('name')">Business Name AI</div>
 </div>
 
-<!-- TOOL 1: PROFIT -->
-<div id="tool0" class="tool active">
-<div class="card">
-<h2>Monthly Profit Calculator</h2>
-<input id="rev" type="number" placeholder="Monthly Revenue" class="input">
-<input id="cost" type="number" placeholder="Monthly Costs" class="input">
-<button class="btn" onclick="calcProfit()">Calculate Profit</button>
-<div id="res1" class="result"></div>
-</div>
-</div>
+<!-- TOOL 1: ROI ANALYZER -->
+<div id="roi" class="tool">
+<div class="tool-card">
+<h2>ROI Analyzer</h2>
+<input id="gain" type="number" placeholder="Total Revenue in 12 months" class="input">
+<input id="invest" type="number" placeholder="Total Investment" class="input">
+<button class="btn" onclick="calcROI()">Analyze ROI</button>
+<div id="roiResult" class="result"></div>
+</div></div>
 
-<!-- TOOL 2: BREAK-EVEN -->
-<div id="tool1" class="tool">
-<div class="card">
-<h2>Break-even Calculator</h2>
-<input id="startup" type="number" placeholder="Startup Cost" class="input">
-<input id="mprofit" type="number" placeholder="Monthly Profit" class="input">
-<button class="btn" onclick="calcBE()">When Do I Break Even?</button>
-<div id="res2" class="result"></div>
-</div>
-</div>
-
-<!-- TOOL 3: ROI -->
-<div id="tool2" class="tool">
-<div class="card">
-<h2>ROI Calculator</h2>
-<input id="gain" type="number" placeholder="Total Gain" class="input">
-<input id="invest" type="number" placeholder="Investment" class="input">
-<button class="btn" onclick="calcROI()">Calculate ROI</button>
-<div id="res3" class="result"></div>
-</div>
-</div>
-
-<!-- TOOL 4: PRICING -->
-<div id="tool3" class="tool">
-<div class="card">
-<h2>Pricing Calculator</h2>
-<input id="pcost" type="number" placeholder="Cost per product/service" class="input">
+<!-- TOOL 2: PRICING STRATEGY -->
+<div id="pricing" class="tool" style="display:none">
+<div class="tool-card">
+<h2>Pricing Strategy AI</h2>
+<input id="cost" type="number" placeholder="Cost per product/service" class="input">
 <input id="margin" type="number" placeholder="Desired Margin %" class="input">
-<button class="btn" onclick="calcPrice()">Suggest Price</button>
-<div id="res4" class="result"></div>
-</div>
-</div>
+<button class="btn" onclick="calcPrice()">Generate Pricing</button>
+<div id="priceResult" class="result"></div>
+</div></div>
 
-<!-- TOOL 5: TIMELINE GRAPH -->
-<div id="tool4" class="tool">
-<div class="card">
-<h2>Profit Timeline</h2>
-<input id="tstartup" type="number" placeholder="Startup Cost" class="input">
-<input id="tprofit" type="number" placeholder="Expected Monthly Profit" class="input">
-<button class="btn" onclick="drawChart()">Show Timeline</button>
-<canvas id="chart" style="margin-top:20px"></canvas>
-</div>
-</div>
+<!-- TOOL 3: BREAK-EVEN PRO -->
+<div id="breakeven" class="tool" style="display:none">
+<div class="tool-card">
+<h2>Break-even Pro</h2>
+<input id="fixed" type="number" placeholder="Monthly Fixed Costs: Rent, Salary" class="input">
+<input id="price" type="number" placeholder="Selling Price per Unit" class="input">
+<input id="vcost" type="number" placeholder="Variable Cost per Unit" class="input">
+<button class="btn" onclick="calcBE()">Calculate Break-even</button>
+<div id="beResult" class="result"></div>
+</div></div>
 
-<!-- TOOL 6: AD BUDGET -->
-<div id="tool5" class="tool">
-<div class="card">
-<h2>Ad Budget Calculator</h2>
-<input id="customers" type="number" placeholder="How many customers do you want?" class="input">
-<button class="btn" onclick="calcAds()">Get Ad Plan</button>
-<div id="res6"></div>
-</div>
-</div>
+<!-- TOOL 4: LAUNCH TIMELINE -->
+<div id="timeline" class="tool" style="display:none">
+<div class="tool-card">
+<h2>90-Day Launch Timeline</h2>
+<input id="bizName" type="text" placeholder="Business Name: e.g Coffee Shop" class="input">
+<button class="btn" onclick="genTimeline()">Generate Plan</button>
+<div id="timelineResult" class="result"></div>
+</div></div>
 
-<!-- TOOL 7: NAME CHECKER -->
-<div id="tool6" class="tool">
-<div class="card">
-<h2>Business Name Checker</h2>
-<input id="bizname" type="text" placeholder="Enter business name" class="input">
-<button class="btn" onclick="checkName()">Check Domain + Social</button>
-<div id="res7"></div>
-</div>
-</div>
+<!-- TOOL 5: RISK SCORE -->
+<div id="risk" class="tool" style="display:none">
+<div class="tool-card">
+<h2>Business Risk Score</h2>
+<select id="capital" class="input"><option value="">Startup Capital</option><option value="1">Under $5K</option><option value="2">$5K-$20K</option><option value="3">Over $20K</option></select>
+<select id="experience" class="input"><option value="">Your Experience</option><option value="1">Beginner</option><option value="2">Some Experience</option><option value="3">Expert</option></select>
+<button class="btn" onclick="calcRisk()">Get Risk Score</button>
+<div id="riskResult" class="result"></div>
+</div></div>
 
-</div>
+<!-- TOOL 6: PROFIT FORECAST -->
+<div id="profit" class="tool" style="display:none">
+<div class="tool-card">
+<h2>12-Month Profit Forecast</h2>
+<input id="monthlySales" type="number" placeholder="Expected Monthly Sales" class="input">
+<input id="profitMargin" type="number" placeholder="Profit Margin %" class="input">
+<button class="btn" onclick="forecast()">Generate Forecast</button>
+<div id="profitResult" class="result"></div>
+</div></div>
+
+<!-- TOOL 7: NAME AI -->
+<div id="name" class="tool" style="display:none">
+<div class="tool-card">
+<h2>Business Name AI</h2>
+<input id="niche" type="text" placeholder="Niche: e.g Fitness, Food, Tech" class="input">
+<button class="btn" onclick="genName()">Generate 5 Names</button>
+<div id="nameResult" class="result"></div>
+</div></div>
+
+</main>
 
 <script>
 let country = localStorage.getItem('country') || 'US';
 document.getElementById('country').value = country;
 document.getElementById('country').onchange = e => {localStorage.setItem('country', e.target.value); location.reload();}
 function format(n){const s={US:'$',UK:'£',CA:'C$',NG:'₦'}; return s[country]+Number(n).toLocaleString();}
+function showTool(id){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));event.target.classList.add('active')}
 
-function showTab(n){
- document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i==n));
- document.querySelectorAll('.tool').forEach((d,i)=>d.classList.toggle('active',i==n));
-}
-
-// 1. PROFIT
-function calcProfit(){res1.innerText = 'Monthly Profit: ' + format(+rev.value - +cost.value)}
-
-// 2. BREAK-EVEN
-function calcBE(){
- let months = (+startup.value / +mprofit.value).toFixed(1);
- res2.innerText = `Break-even in ${months} months`;
-}
-
-// 3. ROI
 function calcROI(){
- let roi = ((+gain.value - +invest.value) / +invest.value * 100).toFixed(1);
- res3.innerText = `ROI: ${roi}%`;
+ let gain=+gain.value, invest=+invest.value;
+ let roi=((gain-invest)/invest*100).toFixed(1);
+ let status = roi>100?'Excellent':roi>50?'Good':'Risky';
+ roiResult.style.display='block';
+ roiResult.innerHTML=`<h3>ROI: ${roi}% - ${status}</h3>
+ <p>You will make ${format(gain-invest)} profit in 12 months.</p>
+ <div class="ai-tip"><b>AI Recommendation:</b> If ROI < 50%, reduce costs or increase price. Target 100%+ ROI for new businesses in ${country}.</div>
+ <button class="btn" style="margin-top:10px;background:#111" onclick="exportPDF('ROI Report')">Export PDF</button>`;
 }
 
-// 4. PRICING
 function calcPrice(){
- let price = +pcost.value / (1 - (+margin.value/100));
- res4.innerText = `Charge: ${format(price)} | Profit per sale: ${format(price - +pcost.value)}`;
+ let cost=+cost.value, margin=+margin.value;
+ let price = cost/(1-margin/100);
+ priceResult.style.display='block';
+ priceResult.innerHTML=`<h3>Suggested Price: ${format(price.toFixed(2))}</h3>
+ <p>Profit per sale: ${format(price-cost)}</p>
+ <div class="ai-tip"><b>AI Recommendation:</b> Test 3 prices: ${format(price*0.9)}, ${format(price)}, ${format(price*1.1)}. Use the middle one if customers don't complain.</div>`;
 }
 
-// 5. TIMELINE CHART
-let chart;
-function drawChart(){
- let cost = +tstartup.value; let profit = +tprofit.value;
- let data = [ -cost ];
- for(let i=1; i<=12; i++){ data.push(data[i-1] + profit) }
- if(chart) chart.destroy();
- chart = new Chart(document.getElementById('chart'), {
-  type: 'line',
-  data: {labels:['Start',...Array(12).fill().map((_,i)=>'M'+(i+1))], datasets:[{label:'Cumulative Profit', data:data, borderColor:'#22c55e', fill:true}]},
-  options:{responsive:true}
- });
+function calcBE(){
+ let fixed=+fixed.value, price=+price.value, vcost=+vcost.value;
+ let be = Math.ceil(fixed/(price-vcost));
+ beResult.style.display='block';
+ beResult.innerHTML=`<h3>Break-even: ${be} sales per month</h3>
+ <p>After ${be} sales, every sale is profit.</p>
+ <div class="ai-tip"><b>AI Recommendation:</b> To break even in 30 days, you need ${be} sales = ${Math.ceil(be/30)} sales per day.</div>`;
 }
 
-// 6. AD BUDGET - Country based
-function calcAds(){
- let c = +customers.value;
- let plans = {US:`FB: ${format(c*2)} | TikTok: ${format(c*1.5)}`, UK:`FB: ${format(c*1.8)} | Google: ${format(c*2.5)}`, CA:`FB: ${format(c*2.2)} | TikTok: ${format(c*1.6)}`, NG:`WhatsApp: ${format(c*100)} | FB: ${format(c*200)}`};
- res6.innerHTML = `<p><b>To get ${c} customers in ${country}:</b></p><p>${plans[country]}</p>`;
+function genTimeline(){
+ let name=bizName.value;
+ timelineResult.style.display='block';
+ timelineResult.innerHTML=`<h3>90-Day Plan for ${name}</h3>
+ <p><b>Days 1-30:</b> Register, Branding, Get first 3 customers<br>
+ <b>Days 31-60:</b> Marketing push, System setup<br>
+ <b>Days 61-90:</b> Scale and hire</p>
+ <div class="ai-tip"><b>AI Recommendation:</b> Spend 50% of budget in first 30 days on customer acquisition.</div>`;
 }
 
-// 7. NAME CHECKER
-function checkName(){
- let name = bizname.value.toLowerCase().replace(/ /g,'');
- res7.innerHTML = `
- <p>✅ ${name}.com - Likely Available</p>
- <p>✅ @${name} - Check Instagram</p>
- <p>✅ @${name} - Check TikTok</p>
- <p style="font-size:14px;color:gray">Tip: Secure them fast before someone else does</p>
- `;
+function calcRisk(){
+ let score = (+capital.value +experience.value)/2;
+ let level = score>2?'Low Risk':score>1.5?'Medium Risk':'High Risk';
+ riskResult.style.display='block';
+ riskResult.innerHTML=`<h3>Risk Level: ${level}</h3>
+ <p>Score: ${score}/3</p>
+ <div class="ai-tip"><b>AI Recommendation:</b> ${level==='High Risk'?'Start smaller and validate with 10 customers first':'You are ready to launch. Focus on marketing.'}</div>`;
+}
+
+function forecast(){
+ let sales=+monthlySales.value, margin=+profitMargin.value;
+ let monthlyProfit = sales*margin/100;
+ profitResult.style.display='block';
+ profitResult.innerHTML=`<h3>Year 1 Profit: ${format(monthlyProfit*12)}</h3>
+ <p>Monthly Profit: ${format(monthlyProfit)}</p>
+ <div class="ai-tip"><b>AI Recommendation:</b> Reinvest 30% of profit back into ads for months 1-6 to double sales.</div>`;
+}
+
+function genName(){
+ let n=niche.value;
+ let names=[`${n}Pro`, `Elite${n}`, `${n}Hub`, `Prime${n}`, `${n}360`];
+ nameResult.style.display='block';
+ nameResult.innerHTML=`<h3>5 AI Generated Names</h3><p>${names.join('<br>')}</p>
+ <div class="ai-tip"><b>AI Recommendation:</b> Check domain availability on namecheap.com before deciding.</div>`;
+}
+
+function exportPDF(title){
+ alert(title+' exported! In real site this will download PDF.');
 }
 </script>
+
+<footer><div class="container">© 2026 MonyGist. AI-powered business tools.</div></footer>
 </body></html>
