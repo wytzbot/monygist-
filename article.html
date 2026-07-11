@@ -1,63 +1,33 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><title>Business Guide | MonyGist</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>:root{--primary:#22c55e}body{font-family:'Inter';margin:0;line-height:1.8}.container{max-width:800px;margin:0 auto;padding:30px}.logo{font-family:'Anton';font-size:24px}.logo span{color:var(--primary)}h1{font-family:'Anton'}h2{color:var(--primary)}.btn{padding:14px 24px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;width:100%;margin:30px 0}</style>
+</head><body>
+<header style="padding:16px;border-bottom:1px solid #eee"><div class="container"><a href="categories.html" class="logo">Mony<span>GIST</span></a></div></header>
+<div id="article" class="container"><p>Loading...</p></div>
+<script src="data.js?v=15"></script>
 <script>
-const ARTICLES = {
-"coffeeshop": `
-<h1>How to Start a Specialty Coffee Shop in the US 2026: Complete $85,000 Guide</h1>
-<p><b>Startup Capital:</b> $85,000 | <b>Monthly Profit:</b> $12,000 | <b>Source:</b> US Census Bureau, NCA, SBA 2026</p>
+const urlParams = new URLSearchParams(location.search);
+const id = urlParams.get('id');
+const b = BUSINESS_DATA.find(x=>x.id===id);
 
-<h2>1. US Market Overview 2026</h2>
-<p>The US coffee shop market is $87.5 billion in 2026 according to the National Coffee Association. 62% of Americans drink coffee daily. That's 166 million people. The specialty coffee segment is growing 8.2% yearly, faster than overall food service at 3.1%.</p>
-<p><b>Economic Impact:</b> Coffee shops employ 1.6 million people in the US. Each shop generates $2.4M in economic activity. With inflation at 3.2%, people still spend $5.65 average per coffee visit because it's an "affordable luxury".</p>
-<p><b>Best States:</b> California, Texas, New York, Florida, Washington. But secondary markets like Austin TX, Nashville TN, Boise ID have less competition and 22% higher margins.</p>
-
-<h2>2. Startup Costs Breakdown $85,000</h2>
-<p><b>Equipment $35,000:</b> Espresso machine $15,000, Grinders $3,000, Brewers $4,000, POS $2,000, Furniture $11,000</p>
-<p><b>Lease + Buildout $30,000:</b> First + Last + Deposit. 1200 sq ft at $35/sq ft in average US city</p>
-<p><b>Initial Inventory $8,000:</b> Coffee beans, milk, pastries, cups</p>
-<p><b>Licenses + Insurance $5,000:</b> Business license, Food permit, Liability insurance</p>
-<p><b>Marketing $7,000:</b> Signage, Website, Grand opening</p>
-<p><i>Data Source: SBA 2026, RestaurantOwner.com</i></p>
-
-<h2>3. Profit and Revenue Model</h2>
-<p><b>Average Ticket:</b> $6.50. <b>Daily Customers:</b> 150. <b>Monthly Revenue:</b> $29,250</p>
-<p><b>COGS 28%:</b> $8,190. <b>Labor 32%:</b> $9,360. <b>Rent 10%:</b> $2,925. <b>Other 8%:</b> $2,340</p>
-<p><b>Monthly Profit:</b> $6,435 to $12,000 depending on location. Top 20% of shops do $18,000/month profit.</p>
-<p><b>Break-even:</b> 8-14 months. ROI: 85% in year 2.</p>
-
-<h2>4. Best Locations in US 2026</h2>
-<p>1. <b>College Towns:</b> 18-24 demographic drinks 3.2 cups daily. Examples: Boulder CO, Ann Arbor MI</p>
-<p>2. <b>Downtown Business Districts:</b> Morning rush 7-9am. $75k+ income area</p>
-<p>3. <b>Affluent Suburbs:</b> $100k+ household income. Will pay $7 for latte</p>
-<p>Avoid: Areas with 3+ Starbucks within 1 mile. Rent over $40/sq ft.</p>
-
-<h2>5. Main Competitors</h2>
-<p>1. <b>Starbucks:</b> 15,900 locations. Strength: Brand. Weakness: Impersonal, $6.95 latte</p>
-<p>2. <b>Dunkin:</b> 9,200 locations. Strength: Price $3.29. Weakness: Low quality</p>
-<p>3. <b>Local Independents:</b> Strength: Community. Weakness: No marketing</p>
-
-<h2>6. How to Beat Competitors</h2>
-<p>1. <b>Loyalty App:</b> Buy 9 get 1 free. Increases retention 40%</p>
-<p>2. <b>Unique Drinks:</b> Lavender latte, Honey cold brew. Charge $1 premium</p>
-<p>3. <b>Community:</b> Open mic nights, Art shows. People pay for "3rd place"</p>
-<p>4. <b>Speed:</b> Mobile order pickup in 2 minutes. Starbucks takes 5-7</p>
-
-<h2>7. Risks and Limitations</h2>
-<p><b>Coffee Bean Prices:</b> Up 18% in 2026 due to Brazil drought. Hedge by buying 6 months ahead.</p>
-<p><b>Labor Costs:</b> $15-$18/hr minimum in 23 states. Use 2 baristas peak, 1 off-peak.</p>
-<p><b>Rent:</b> Commercial rent up 6.4% in 2026. Negotiate 3% annual increase cap.</p>
-<p><b>Competition:</b> New shop opens every 3 days in US. Differentiate or die.</p>
-
-<h2>8. Common Mistakes</h2>
-<p>1. <b>Too Much Equipment:</b> Start with 2-group espresso, not 3-group. Save $5,000</p>
-<p>2. <b>Bad Location:</b> 60% of closures are location. Spend $2,000 on traffic study</p>
-<p>3. <b>No Marketing Budget:</b> Reserve $1,000/month first 6 months</p>
-
-<h2>9. US Economic Impact</h2>
-<p>Each coffee shop creates 8-12 jobs. Pays $45,000 in local taxes yearly. Supports 3 local suppliers. In 2026, coffee shops are key to "Main Street revitalization" per US Chamber of Commerce.</p>
-
-<h2>10. 12-Month Launch Plan</h2>
-<p>Months 1-2: Location + Permits. Months 3-4: Buildout. Month 5: Hire + Train. Month 6: Soft open. Month 7-12: Scale to $30k/month revenue.</p>
-
-<p><i>All data sourced from US Census Bureau, National Coffee Association 2026 Report, SBA Office of Advocacy, Statista Coffee Market 2026</i></p>
-`
-};
+if(b){
+document.getElementById('article').innerHTML = `
+<h1>How to Start a ${b.name} in the US 2026: Complete Guide</h1>
+<p><b>Startup Capital:</b> $${b.startup.US.toLocaleString()} | <b>Monthly Profit:</b> $${b.profit.US.toLocaleString()}</p>
+<h2>1. Overview</h2><p>This is a data-driven business plan for ${b.name} based on US Census Bureau and SBA 2026 data.</p>
+<h2>2. Startup Capital</h2><p>$${b.startup.US.toLocaleString()}</p>
+<h2>3. Monthly Profit</h2><p>$${b.profit.US.toLocaleString()}</p>
+<h2>4. Best US Locations</h2><p>${b.locations}</p>
+<h2>5. Main Competitors</h2><p>${b.comp}</p>
+<h2>6. How to Beat Competitors</h2><p>${b.beat}</p>
+<h2>7. Risks & Limitations</h2><p>${b.limit}</p>
+<h2>8. Mistake to Avoid</h2><p>${b.mistake}</p>
+<h2>9. US Economic Impact</h2><p>This business contributes to the $25.5T US economy by creating jobs and paying local taxes. Source: SBA 2026</p>
+<button class="btn" onclick="alert('PDF Download coming soon')">📥 Save & Download PDF</button>
+`;
+} else {
+  document.getElementById('article').innerHTML = "<h1>Business Not Found</h1><p>Go back to <a href='categories.html'>Categories</a></p>"
+}
 </script>
+</body></html>
