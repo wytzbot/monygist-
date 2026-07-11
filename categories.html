@@ -1,67 +1,25 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Business Categories | MonyGist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categories | MonyGist US</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#22c55e;--bg:#fff;--text:#111827;--card:#fff;--border:#e5e7eb}
-body.dark{--bg:#0b1220;--text:#f3f4f6;--card:#111827;--border:#1f2937}
-*{box-sizing:border-box}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);margin:0}
-.container{max-width:1200px;margin:0 auto;padding:16px}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
-.logo{font-family:'Anton';font-size:24px;text-decoration:none;color:var(--text)}.logo span{color:var(--primary)}
-.search{width:100%;padding:14px;border:2px solid var(--primary);border-radius:12px;font-size:16px;margin:20px 0;background:var(--card);color:var(--text)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0}
-.card{background:var(--card);padding:24px 12px;border-radius:14px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:16px;font-weight:700}
-.card:hover{border-color:var(--primary)}
-footer{background:#111827;color:#d1d5db;padding:40px 16px;margin-top:60px;font-size:14px}
-@media (min-width: 768px){
-  .grid{grid-template-columns:repeat(3,1fr)}
-  .card{padding:40px; font-size:20px}
-  .container{padding:20px}
-</style>
-</head><body>
-<header class="navbar container">
-<a href="index.html" class="logo">Mony<span>GIST</span></a>
-<div><select id="country" style="padding:8px"><option>US</option><option>UK</option><option>CA</option><option>NG</option></select>
-<button onclick="toggleDark()">🌙</button></div>
-</header>
-
-<main class="container">
-<input id="search" placeholder="Search: coffee, POS, laundry..." class="search" onkeyup="load()">
-<h2 id="title" style="font-size:20px">Browse by Category</h2><div id="catGrid" class="grid"></div>
-<h2 id="bizTitle" style="display:none;font-size:20px">Businesses in <span id="catName"></span></h2><div id="bizGrid" class="grid"></div>
-</main>
-<script src="data.js?v=12"></script>
-<script>
-const businesses = [
-{id:"pos",name:"POS Business",cat:"Finance",summary:"Earn on transfers",startup:{US:2000,UK:1800,CA:2500,NG:350000},profit:{US:800,UK:700,CA:900,NG:150000},comp:"Banks",beat:"24/7 service",limit:"Network",mistake:"No cash"},
-{id:"coffee",name:"Coffee Shop",cat:"Food",summary:"$8k-$15k/month",startup:{US:50000,UK:40000,CA:65000,NG:8000000},profit:{US:10000,UK:8000,CA:12000,NG:1500000},comp:"Starbucks",beat:"App loyalty",limit:"High rent",mistake:"Too much equipment"},
-{id:"laundry",name:"Laundry",cat:"Service",summary:"Weekly customers",startup:{US:15000,UK:12000,CA:18000,NG:2500000},profit:{US:3500,UK:3000,CA:4000,NG:600000},comp:"Dry cleaners",beat:"24hr delivery",limit:"Power",mistake:"Underpricing"},
-{id:"agency",name:"Marketing Agency",cat:"Online",summary:"$500-$5000/client",startup:{US:1000,UK:800,CA:1200,NG:200000},profit:{US:6000,UK:5000,CA:7000,NG:1000000},comp:"Freelancers",beat:"3x ROI",limit:"Retention",mistake:"Any client"},
-{id:"gym",name:"Boutique Gym",cat:"Health",summary:"$99/month members",startup:{US:100000,UK:80000,CA:120000,NG:15000000},profit:{US:18000,UK:14000,CA:20000,NG:3500000},comp:"Planet Fitness",beat:"Group classes",limit:"Equipment cost",mistake:"5yr lease"}
-];
-const categories = ["Food","Service","Online","Finance","Health"];
-let country = localStorage.getItem('country') || 'US';
-document.getElementById('country').value = country;
-document.getElementById('country').onchange = e => {localStorage.setItem('country', e.target.value); location.reload();}
-function format(n){const s={US:'$',UK:'£',CA:'C$',NG:'₦'}; return s[country]+Number(n).toLocaleString();}
-function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'));}
-if(localStorage.getItem('dark')==='true')document.body.classList.add('dark');
-function load(){
- let q = search.value.toLowerCase();
- let cats = q? [...new Set(businesses.filter(b=>b.name.toLowerCase().includes(q)).map(b=>b.cat))] : categories;
- catGrid.innerHTML = cats.map(c=>`<div class="card" onclick="showBiz('${c}')">${c}</div>`).join('');
-}
-function showBiz(cat){
- title.style.display='none'; bizTitle.style.display='block'; catName.innerText = cat;
- let data = businesses.filter(b=>b.cat===cat);
- bizGrid.innerHTML = data.map(b=>`<div class="card" onclick="location.href='article.html?id=${b.id}'">${b.name}<p style="font-size:12px;font-weight:400;margin-top:8px">${b.summary}</p></div>`).join('');
- window.scrollTo(0, bizGrid.offsetTop);
-} load();
-</script>
-<footer><div class="container" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
-<div><h3 style="font-family:'Anton';color:#fff;font-size:18px">Mony<span style="color:#22c55e">GIST</span></h3></div>
-<div><h4 style="color:#fff">Legal</h4><a href="privacy.html" style="color:#9ca3af;text-decoration:none;display:block">Privacy</a></div>
-</div><div style="text-align:center;margin-top:20px">© 2026 MonyGist</div></footer>
+:root{--primary:#22c55e;--bg:#f0fff4;--text:#111827}
+body{font-family:'Inter';background:var(--bg);margin:0}
+.navbar{background:#fff;padding:16px;border-bottom:1px solid #e5e7eb}
+.logo{font-family:'Anton';font-size:24px;color:#111}.logo span{color:var(--primary)}
+.container{max-width:600px;margin:0 auto;padding:20px}
+h1{background:var(--primary);color:#fff;text-align:center;padding:20px;margin:0;font-family:'Anton'}
+.card{background:#fff;border:2px solid var(--primary);border-radius:12px;padding:24px;margin:16px 0;text-align:center;cursor:pointer}
+.card:hover{transform:scale(1.02)}
+</style></head><body>
+<header class="navbar"><div class="container"><a href="index.html" class="logo">Mony<span>GIST</span></a></div></header>
+<h1>Choose a Category</h1>
+<div class="container">
+<div class="card" onclick="location='businesses.html?cat=Food'"><h2>Food</h2><p>10 Business Ideas</p></div>
+<div class="card" onclick="location='businesses.html?cat=Service'"><h2>Service</h2><p>10 Business Ideas</p></div>
+<div class="card" onclick="location='businesses.html?cat=Online'"><h2>Online</h2><p>10 Business Ideas</p></div>
+<div class="card" onclick="location='businesses.html?cat=Finance'"><h2>Finance</h2><p>10 Business Ideas</p></div>
+<div class="card" onclick="location='businesses.html?cat=Health'"><h2>Health</h2><p>10 Business Ideas</p></div>
+</div>
 </body></html>
