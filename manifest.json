@@ -1,12 +1,22 @@
 {
-  "name": "MonyGist - Business Ideas & Calculators",
-  "short_name": "MonyGist",
+  "name": "MonyGIST - $10K Business Ideas",
+  "short_name": "MonyGIST",
+  "description": "Data-driven business ideas with real US profit numbers and startup costs",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#2563eb",
+  "background_color": "#f9fafb",
+  "theme_color": "#22c55e",
+  "orientation": "portrait",
   "icons": [
-    {"src": "asset/img/icon-192.png", "sizes": "192x192", "type": "image/png"},
-    {"src": "asset/img/icon-512.png", "sizes": "512x512", "type": "image/png"}
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }
