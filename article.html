@@ -160,8 +160,29 @@ if(business){
       <div class="highlight"><b>90 Day Plan:</b> Days 1-30: Get 5 customers. Days 31-60: Get to $5k/mo. Days 61-90: Systemize and hit $${business.profit.US.toLocaleString()}/mo.</div>
     </div>
 
-    <button class="btn" onclick="alert('AI Business Plan Generator for ${business.name} is Coming Soon')">Generate Full 30-Page AI Business Plan + Financials</button>
-  `;
+    <form id="leadForm" style="margin-top:20px;padding:20px;background:#f0fdf4;border-radius:12px">
+  <h3>Enter Email To Download Your Free Plan</h3>
+  <input type="email" id="userEmail" required placeholder="you@gmail.com" style="width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin:10px 0">
+  <button type="submit" class="btn">Download PDF Now</button>
+</form>
+
+<script>
+const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE"; // I'll show you how to get this
+
+document.getElementById('leadForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const email = document.getElementById('userEmail').value;
+  const businessName = business.name;
+  
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify({email: email, business: businessName, date: new Date()})
+  });
+  
+  alert('PDF Downloading...');
+  // then trigger the PDF download from previous code
+});
+</script>
 } else {
   div.innerHTML = `<h1>Business Not Found</h1><p>The ID "${bizId}" doesn't exist in data.js. Check your BUSINESS_DATA array.</p>`;
 }
