@@ -160,58 +160,54 @@ if(business){
       <div class="highlight"><b>90 Day Plan:</b> Days 1-30: Get 5 customers. Days 31-60: Get to $5k/mo. Days 61-90: Systemize and hit $${business.profit.US.toLocaleString()}/mo.</div>
     </div>
 
+    <!-- SAFE LEAD FORM - ADDED HERE -->
     <div style="max-width:500px; margin:40px auto; padding:30px; background:#f8f9fa; border-radius:12px; text-align:center;">
-  <h2 style="margin-bottom:10px;">Get 500 Free Business Emails</h2>
-  <p style="margin-bottom:20px; color:#555;">Download the full list for <b id="bizName">this business</b></p>
-  
-  <form id="leadForm">
-    <input type="email" id="email" placeholder="Enter your best email" required 
-      style="width:100%; padding:14px; margin-bottom:15px; border:2px solid #ddd; border-radius:8px; font-size:16px;">
-    <button type="submit" 
-      style="width:100%; padding:14px; background:#2563eb; color:white; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer;">
-      Get Free Email List
-    </button>
-  </form>
-  
-  <p style="font-size:12px; color:#888; margin-top:15px;">We respect your privacy. No spam.</p>
-</div>
+      <h2 style="margin-bottom:10px;">Get 500 Free Business Emails</h2>
+      <p style="margin-bottom:20px; color:#555;">Download the full list for <b id="bizName">${business.name}</b></p>
+      
+      <form id="leadForm">
+        <input type="email" id="email" placeholder="Enter your best email" required 
+          style="width:100%; padding:14px; margin-bottom:15px; border:2px solid #ddd; border-radius:8px; font-size:16px;">
+        <button type="submit" 
+          style="width:100%; padding:14px; background:#2563eb; color:white; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer;">
+          Get Free Email List
+        </button>
+      </form>
+      <p style="font-size:12px; color:#888; margin-top:15px;">We respect your privacy. No spam.</p>
+    </div>
+  `; // <-- THIS WAS THE MISSING `;` THAT BROKE IT
 } else {
   div.innerHTML = `<h1>Business Not Found</h1><p>The ID "${bizId}" doesn't exist in data.js. Check your BUSINESS_DATA array.</p>`;
 }
 </script>
-  <script>
+
+<script>
   // 1. YOUR GOOGLE SCRIPT URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1uuObyOB_Tp43iq4M1eOrMuwTryK6McH6erJwlFqXnqxDpcZegiwLLj4B8Uhl1mNR/exec";
 
-  // 2. GET BUSINESS NAME FROM URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const businessId = urlParams.get('id');
-  
-  const businessNames = {
-    "specialty-coffee": "Specialty Coffee Shop",
-    "ecommerce": "Ecommerce Store",
-    "real-estate": "Real Estate Agency"
-  };
-  
-  const businessName = businessNames[businessId] || "Unknown Business";
-
-  // 3. SUBMIT FUNCTION
-  document.getElementById('leadForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    
-    fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({
-        email: email,
-        business: businessName,
-        source: window.location.href
-      })
-    });
-    
-    alert("Success! Check your email + the download will start now");
-    // window.location.href = "your-download-link.pdf"; // Add your PDF link here
+  // 2. WAIT FOR PAGE TO LOAD
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('leadForm');
+    if(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const businessName = document.getElementById('bizName').innerText;
+        
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify({
+            email: email,
+            business: businessName,
+            source: window.location.href
+          })
+        });
+        
+        alert("✅ Got it! Email saved. Download starting...");
+        form.reset();
+      });
+    }
   });
-  </script>
+</script>
 </body></html>
